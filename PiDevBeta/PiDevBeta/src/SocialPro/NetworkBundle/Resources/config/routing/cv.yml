@@ -1,0 +1,19 @@
+curriculavitae_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:CurriculaVitae:index" }
+
+setting:
+    path:     /setting/
+    defaults: { _controller: "SocialProNetworkBundle:UserProfile:edit" }
+
+addExp:
+    path:     /add/{poste}/{entreprise}/{lieu}/{from}/{to}/{description}/{filename}
+    defaults: { _controller: "SocialProNetworkBundle:CurriculaVitae:addExp" }
+    methods:  [GET, POST]
+
+delete_exp:
+    path:     /delete/{id}
+    defaults: { _controller: "SocialProNetworkBundle:CurriculaVitae:deleteExp" }
+    methods:  [GET, POST]
+
+

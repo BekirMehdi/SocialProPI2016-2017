@@ -1,0 +1,36 @@
+affectationMembre:
+    path:     /new/{idUs}
+    defaults: { _controller: "SocialProNetworkBundle:Projets:accesDetails" }
+    methods:  GET
+    options:
+        expose: true
+
+statEquipe:
+    path:     /statEquipe
+    defaults: { _controller: "SocialProNetworkBundle:Teams:statEquipe" }
+    methods:  GET
+
+adminTeams_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:Teams:index" }
+    methods:  GET
+
+adminTeams_show:
+    path:     /{id}/show
+    defaults: { _controller: "SocialProNetworkBundle:Teams:show" }
+    methods:  GET
+
+adminTeams_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:Teams:new" }
+    methods:  [GET, POST]
+
+adminTeams_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SocialProNetworkBundle:Teams:edit" }
+    methods:  [GET, POST]
+
+adminTeams_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SocialProNetworkBundle:Teams:delete" }
+    methods:  DELETE

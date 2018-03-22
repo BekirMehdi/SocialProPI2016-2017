@@ -1,0 +1,33 @@
+adminMeetings_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:Meetings:index" }
+    methods:  GET
+
+adminMeetings_show:
+    path:     /{id}/show
+    defaults: { _controller: "SocialProNetworkBundle:Meetings:show" }
+    methods:  GET
+
+adminMeetings_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:Meetings:new" }
+    methods:  [GET, POST]
+
+adminMeetings_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SocialProNetworkBundle:Meetings:edit" }
+    methods:  [GET, POST]
+
+adminMeetings_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SocialProNetworkBundle:Meetings:delete" }
+    methods:  DELETE
+
+adminMeetings_stat:
+    path:     /showstat
+    defaults: { _controller: "SocialProNetworkBundle:Meetings:Stat2" }
+    methods:  GET
+
+Pdfforum:
+    path:     /newpdf
+    defaults: { _controller: "SocialProNetworkBundle:Meetings:pdfmeeting" }

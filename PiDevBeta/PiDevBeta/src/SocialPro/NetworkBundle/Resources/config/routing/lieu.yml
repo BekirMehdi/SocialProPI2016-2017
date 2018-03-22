@@ -1,0 +1,24 @@
+adminLieu_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:Lieu:index" }
+    methods:  GET
+
+adminLieu_show:
+    path:     /{id}/show
+    defaults: { _controller: "SocialProNetworkBundle:Lieu:show" }
+    methods:  GET
+
+adminLieu_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:Lieu:new" }
+    methods:  [GET, POST]
+
+adminLieu_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SocialProNetworkBundle:Lieu:edit" }
+    methods:  [GET, POST]
+
+adminLieu_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SocialProNetworkBundle:Lieu:delete" }
+    methods:  DELETE

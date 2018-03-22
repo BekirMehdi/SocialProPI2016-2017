@@ -1,0 +1,99 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+<script src="{{ asset("lib/jquery/jquery.js")}}"></script>
+<script src="{{ asset("lib/jquery/affectationMembre.js")}}"></script>
+
+<div class="page-header">
+    <h1 class="page-title">creation d'equipe</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('adminProjets_index') }}">Acueil</a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Equipe</a></li>
+        <li class="breadcrumb-item active">Ajout</li>
+    </ol>
+    <div class="page-header-actions">
+        <a class="btn btn-sm btn-primary btn-round waves-effect" href="{{ path('adminTeams_index') }}">
+            <i class="icon md-link" aria-hidden="true"></i>
+            <span class="hidden-sm-down">Retour a la liste</span>
+        </a>
+    </div>
+</div>
+<div class=" page-content container-fluid col-md-12">
+    <div class="panel">
+        {{ form_start(form) }}
+        <div class="panel-body container-fluid">
+            <div class="form-group form-material " data-plugin="formMaterial">
+                <label class="form-control-label">nom</label>
+                {{ form_widget(form.name) }}
+            </div>
+
+            <!-- Panel Jquery Multi Select -->
+            <div class="panel">
+                <div class="panel-body container-fluid">
+                    <div class="row row-lg">
+                        <div class="col-lg-6">
+                            <!-- Example Multi-Select Public Methods -->
+                            <div class="example-wrap">
+                                <div class="example">
+                                    <select class="multi-select-methods form-control ">
+                                        <optgroup label="Membres managers">
+                                            {% for manag in manager %}
+                                            <option class="affect" id="{{ manag.id }}" value="{{ manag.id }}">{{ manag.username }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                        <optgroup label="Membres Scrum Master">
+                                            {% for scrum in scrumMaster %}
+                                                <option class="affect" id="{{ scrum.id }}" value="{{ scrum.id }}">{{ scrum.username }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                        <optgroup label="Membres Product Owner">
+                                            {% for product in productOwner %}
+                                                <option class="affect" id="{{ product.id }}" value="{{ product.id }}">{{ product.username }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                        <optgroup label="Membres Developper">
+                                            {% for dev in developper %}
+                                                <option class="affect" id="{{ dev.id }}" value="{{ dev.id }}">{{ dev.username }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="example-buttons">
+                                    <button class="btn btn-primary" id="buttonSelectAll" type="button">tout sélectionner</button>
+                                    <button class="btn btn-primary" id="buttonDeselectAll" type="button">tout déselectionner</button>
+                                    <button class="btn btn-primary" id="buttonRefresh" type="button">rafraîchir</button>
+                                </div>
+                            </div>
+                            <!-- End Example Multi-Select Public Methods -->
+                        </div>
+                        <div class="col-md-6 messErr">
+                            <div class="example">
+                                <blockquote class="blockquote custom-blockquote blockquote-danger">
+                                    <p class="mb-0 textEq">Affecté les membres a votre equipe s'il vous plaît
+                                    </p>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="col-md-6 messSucc" >
+                            <div class="example">
+                                <blockquote class="blockquote custom-blockquote blockquote-success">
+                                    <p class="mb-0">Bravo ! vous pouvez selectionnez ou desélectionner en
+                                        cliquant sur le nom du membre.
+                                    </p>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Panel Jquery Multi Select -->
+
+            <div class="form-group form-material " data-plugin="formMaterial">
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <button type="submit" class="btn btn-primary waves-effect" id="validateButton1" value="Create">ajouter</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    {% endblock %}

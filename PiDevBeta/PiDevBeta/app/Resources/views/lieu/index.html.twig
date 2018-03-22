@@ -1,0 +1,71 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+
+
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap-extend.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("assets/css/site.min.css")}}">
+
+    <link rel="stylesheet" href="{{ asset("assets/examples/css/tables/basic.css")}}">
+    <div class="panel">
+
+
+        <div class="col-lg-6">
+            <!-- Example Bordered Table -->
+            <div class="example-wrap">
+
+
+                <div class="example table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Idli</th>
+                            <th>Nom</th>
+                            <th>Capacite</th>
+                            <th>Disponibilite</th>
+                            <th>Actions</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for lieu in lieus %}
+                            <tr style="width: 50%">
+                                <td><a href="{{ path('adminLieu_show', { 'id': lieu.idLi }) }}">{{ lieu.idLi }}</a></td>
+                                <td>{{ lieu.nom }}</td>
+                                <td>{{ lieu.capacite }}</td>
+                                <td>{{ lieu.disponibilite }}</td>
+
+                                <td class="text-nowrap">
+                                    <button onclick="location.href='{{ path('adminLieu_show', { 'id': lieu.idLi }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                            data-original-title="Show">
+                                        <i class="icon md-plus" aria-hidden="true"></i>
+                                    </button>
+
+                                    <button onclick="location.href='{{ path('adminLieu_edit', { 'id': lieu.idLi }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                            data-original-title="Edit">
+                                        <i class="icon md-wrench" aria-hidden="true"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <button onclick="location.href='{{ path('adminLieu_new') }}' " type="submit" class="btn btn-primary" value="New">Create a new lieu</button>
+
+
+                </div>
+            </div>
+            <!-- End Example Bordered Table -->
+        </div>
+    </div>
+
+
+{% endblock %}

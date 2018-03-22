@@ -1,0 +1,83 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+
+
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap-extend.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("assets/css/site.min.css")}}">
+
+    <link rel="stylesheet" href="{{ asset("assets/examples/css/tables/basic.css")}}">
+    <div class="panel">
+
+
+        <div class="col-lg-6">
+            <!-- Example Bordered Table -->
+            <div class="example-wrap">
+
+
+                <div class="example table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Idus</th>
+                            <th>Name</th>
+                            <th>Complexite</th>
+                            <th>Description</th>
+                            <th>Datestart</th>
+                            <th>Deadline</th>
+                            <th>Successrate</th>
+                            <th>Priority</th>
+                            <th>Actions</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for userStory in userStories %}
+                            <tr style="width: 50%">
+                                <td><a href="{{ path('adminUserStories_show', { 'id': userStory.getIdUs() }) }}">{{ userStory.getIdUs() }}</a></td>
+                                <td>{{ userStory.getName() }}</td>
+                                <td>{{ userStory.getComplexite() }}</td>
+                                <td>{{ userStory.getDescription() }}</td>
+                                <td>{% if userStory.getDatestart() %}{{ userStory.getDatestart()|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>{% if userStory.getDeadline() %}{{ userStory.getDeadline()|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>{{ userStory.getSuccessrate() }}</td>
+                                <td>{{ userStory.getPriority() }}</td>
+
+                                <td class="text-nowrap">
+                                    <button onclick="location.href='{{ path('adminUserStories_show', { 'id': userStory.getIdUs() }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                            data-original-title="Show">
+                                        <i class="icon md-close" aria-hidden="true"></i>
+                                    </button>
+
+                                    <button onclick="location.href='{{ path('adminUserStories_edit', { 'id': userStory.getIdUs() }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                            data-original-title="Edit">
+                                        <i class="icon md-wrench" aria-hidden="true"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class=" " >
+                        {{ knp_pagination_render(userStories) }}
+                    </div>
+
+                    <button onclick="location.href='{{ path('adminUserStories_new') }}' " type="submit" class="btn btn-primary" value="New">Create a new user story</button>
+
+
+                </div>
+            </div>
+            <!-- End Example Bordered Table -->
+        </div>
+    </div>
+
+
+{% endblock %}

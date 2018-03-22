@@ -1,0 +1,29 @@
+adminEvents_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:Events:index" }
+    methods:  GET
+
+adminEvents_show:
+    path:     /{id}/show
+    defaults: { _controller: "SocialProNetworkBundle:Events:show" }
+    methods:  GET
+
+adminEvents_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:Events:new" }
+    methods:  [GET, POST]
+
+adminEvents_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SocialProNetworkBundle:Events:edit" }
+    methods:  [GET, POST]
+
+adminEvents_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SocialProNetworkBundle:Events:delete" }
+    methods:  DELETE
+
+adminEvents_cal:
+    path:     /calTest
+    defaults: { _controller: "SocialProNetworkBundle:Events:cal" }
+    methods:  GET

@@ -1,0 +1,526 @@
+{% extends ':CurriculaVitae:base.html.twig' %}
+
+{% block body %}
+    <div class="page">
+        <div class="page-content container-fluid">
+            <div class="row">
+                <!-- Middle Column -->
+                <div class="col-lg-12 col-xl-6 push-xl-3">
+
+                    <!-- User Background -->
+                    <div class="user-background card card-shadow">
+                        <div class="card-header card-header-transparent p-20">
+                            <h4 class="card-title mb-0">Background</h4>
+                        </div>
+                        <div class="card-block">
+                            <h5 class="card-title">
+                                <i class="icon md-clipboard"></i>
+                                <span>Summary</span>
+                            </h5>
+                            <p class="card-text">
+                            {{ app.user.description }}
+                            </p>
+                        </div>
+                                <div class="card-block">
+                                    <h5 class="card-title">
+                                        <i class="icon md-briefcase"></i>
+                                        <span>Experience</span>
+                                    </h5>
+                                    <ul class="timeline timeline-single" id="expList">
+                                        {% for e in cv %}
+                                        {% if e.type =="Experience" %}
+                                        <li class="timeline-item" id="listExperance{{ e.idCv }}">
+                                            <div class="timeline-dot"></div>
+                                            <div class="timeline-content">
+                                                <img class="float-right" src="{{ asset("template/global/portraits/"~ e.file)}}" alt="...">
+                                                <span class="block font-size-15 mb-5"> {{ e.local }} {{ e.place }} </span>
+                                                <span class="block mb-5">{{ e.post }}</span>
+                                                <span class="block mb-5">From {{ e.datefrom |date('Y-m-d')}} To {{ e.dateto|date('Y-m-d') }}</span>
+                                                <span class="block mb-5">{{ e.description }}</span>
+                                                <div class="example example-buttons">
+                                                    <button type="button" class="btn btn-pure btn-warning icon md-edit waves-effect waves-light waves-round" id="edit{{ e.idCv }}"></button>
+                                                    <button type="button" class="btn btn-pure btn-danger icon md-delete waves-effect waves-light waves-round"  id="delete{{ e.idCv }}"></button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+
+                        {% for e in cv %}
+
+                            {% if e.type =="Expérience de bénévolat" %}
+
+                            {% endif %}
+                        {% endfor %}
+                        {% for e in cv %}
+
+                            {% if e.type =="Formation" %}
+
+                            {% endif %}
+                        {% endfor %}
+                        {% for e in cv %}
+
+                            {% if e.type =="Certifications" %}
+
+                            {% endif %}
+                        {% endfor %}
+                        {% for e in cv %}
+
+                            {% if e.type =="Projets" %}
+
+                            {% endif %}
+                        {% endfor %}
+                        {% for e in cv %}
+
+                            {% if e.type =="Résultats d’examens" %}
+
+                            {% endif %}
+                        {% endfor %}
+                        {% for e in cv %}
+
+                            {% if e.type =="Brevets" %}
+
+                            {% endif %}
+                        {% endfor %}
+                        {% for e in cv %}
+
+                            {% if e.type =="Prix et distinctions" %}
+
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- End User Background -->
+
+                </div>
+                <!-- End Middle Column -->
+                <!-- Left Column -->
+                <div class="col-lg-6 col-xl-3 pull-xl-6">
+                    <div class="user-info card card-shadow text-center">
+                        <div class="user-base card-block">
+                            <a class="avatar img-bordered avatar-100" href="javascript:void(0)">
+                                <img src="{{ asset("template/global/portraits/"~ app.user.photo)}}" alt="...">
+                            </a>
+                            <h4 class="user-name"> {{ app.user.firstname }} {{ app.user.lastname }}  </h4>
+                            <p class="user-job">{{ app.user.slogan }}</p>
+                            <p class="user-location">Ariana , TUNISIA</p>
+                        </div>
+                        <div class="user-stats">
+                            <a class="user-stat counter" href="javascript:void(0)">
+                                <span class="counter-number font-size-16">{{ following }}</span>
+                                <span class="counter-label inline-block ml-5">Following</span>
+                            </a>
+                            <a class="user-stat counter p-15" href="javascript:void(0)">
+                                <span class="counter-number font-size-16">{{ followers }}</span>
+                                <span class="counter-label inline-block ml-5">Followers</span>
+                            </a>
+                        </div>
+                        <div class="user-socials list-group list-group-full">
+                            <a class="list-group-item justify-content-center" href="javascript:void(0)">
+                                <i class="icon bd-facebook"></i> {{ app.user.smFb }}
+                            </a>
+                            <a class="list-group-item justify-content-center" href="javascript:void(0)">
+                                <i class="icon bd-linkedin"></i>{{ app.user.smLin }}
+                            </a>
+                            <a class="list-group-item justify-content-center" href="javascript:void(0)">
+                                <i class="icon bd-google-plus"></i> {{ app.user.smGplus }}
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End User Info -->
+                    <!-- Friend List -->
+                    <div class="user-friends card card-shadow">
+                        <div class="card-block">
+                            <h4 class="card-title mb-20">
+                                Friends
+                                <span>{{ following }}</span>
+                            </h4>
+                            <ul class="list-group list-group-full m-0">
+                                {% for ami in friends %}
+
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="pr-20">
+                                                <a class="avatar avatar-online" href="{{ path('display', { 'id': ami.idfriend.id }) }}">
+                                                    <img class="img-fluid" src="{{ asset("template/global/portraits/"~ ami.idfriend.photo)}}"alt="...">
+                                                    <i></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="mt-0 mb-5 hover">
+                                                    {{ ami.idfriend.firstname }} {{ ami.idfriend.lastname }}
+                                                </h4>
+                                                <small>{{ ami.idfriend.username }}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Friends List -->
+                </div>
+                <!-- End Left Column -->
+                <!-- Right Column -->
+                <div class="col-lg-6 col-xl-3 ">
+                    <div class="card user-visitors">
+                        <div class="card-header card-header-transparent p-20">
+                            <h4 class="card-title mb-0">Ajouter une section au profil</h4>
+                        </div>
+                        <div class="card-block">
+                            <ul class="list-group list-group-full">
+                                <div class="panel-group panel-group-continuous" id="exampleAccordionContinuous" aria-multiselectable="true" role="tablist">
+                                    <div class="panel">
+                                        <div class="panel-heading" id="exampleHeadingContinuousOne" role="tab">
+                                            <a class="panel-title collapsed" data-parent="#exampleAccordionContinuous" data-toggle="collapse" href="#exampleCollapseContinuousOne" aria-controls="exampleCollapseContinuousOne" aria-expanded="false">
+                                                Parcours
+                                            </a>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="exampleCollapseContinuousOne" aria-labelledby="exampleHeadingContinuousOne" role="tabpanel" aria-expanded="false">
+                                            <div class="panel-body">
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon md-card-travel bg-green-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Expérience professionnelle</h6>
+                                                            <p>Énumérez votre parcours professionnel<br> y compris vos contrats et vos stages</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button" data-target="#exampleFillIn" data-toggle="modal">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon md-balance bg-green-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Formation</h6>
+                                                            <p>Votre profil sera vu 11 fois plus souvent <br> si vous ajoutez votre école.</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon md-favorite-outline bg-red-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Expériences de bénévolat</h6>
+                                                            <p>Soulignez vos passions et vos opportunités de bénévolat.</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <div class="panel-heading" id="exampleHeadingContinuousTwo" role="tab">
+                                            <a class="panel-title" data-parent="#exampleAccordionContinuous" data-toggle="collapse" href="#exampleCollapseContinuousTwo" aria-controls="exampleCollapseContinuousTwo" aria-expanded="true">
+                                                Compétences
+                                            </a>
+                                        </div>
+                                        <div class="panel-collapse collapse show" id="exampleCollapseContinuousTwo" aria-labelledby="exampleHeadingContinuousTwo" role="tabpanel" aria-expanded="true">
+                                            <div class="panel-body">
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon ion-md-medal bg-green-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Compétences</h6>
+                                                            <p>Mettez vos atouts<br>  professionnels en valeur.</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <div class="panel-heading" id="exampleHeadingContinuousThree" role="tab">
+                                            <a class="panel-title collapsed" data-parent="#exampleAccordionContinuous" data-toggle="collapse" href="#exampleCollapseContinuousThree" aria-controls="exampleCollapseContinuousThree" aria-expanded="false">
+                                                Réalisations
+                                            </a>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="exampleCollapseContinuousThree" aria-labelledby="exampleHeadingContinuousThree" role="tabpanel" aria-expanded="false">
+                                            <div class="panel-body">
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon fa-newspaper-o bg-green-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Publications</h6>
+                                                            <p>Listez vos publications et soyez <br>7 fois plus susceptible d’être <br>trouvé(e)s.</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon fa-drivers-license-o bg-green-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Certifications</h6>
+                                                            <p>Les membres qui mentionnent <br>une certification sont 5 fois <br>plus vus.</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon fa-folder-o bg-green-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Projets</h6>
+                                                            <p>Ajoutez des projets réussis pour <br> illustrer votre expérience.</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon oi-checklist  bg-pink-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Résultats d’examens</h6>
+                                                            <p>Si vous vous êtes distingué(e)<br>  à un examen, vous pouvez l’indiquer<br>  ici.</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon fa-rocket bg-orange-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Brevets</h6>
+                                                            <p>Mettez en avant votre expertise <br>  et votre esprit d’innovation.</p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="pr-10">
+                                                            <i class="icon fa-star-o bg-yellow-600 white icon-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mt-0 mb-5 hover">Prix et distinctions</h6>
+                                                            <p>Mettez en avant la reconnaissance <br>que vous avez gagnée. </p>
+                                                        </div>
+                                                        <div class="pt-10 pb-10 p-0">
+                                                            <button class="btn btn-icon btn-primary btn-outline btn-round btn-xs waves-effect waves-light waves-round" type="button" name="button">
+                                                                <i class="icon icon-xs md-plus mr-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Right Column -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade " id="exampleFillIn" aria-hidden="false" aria-labelledby="exampleFillIn" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleFillInModalTitle">Expérience</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-xl-12 form-group">
+                                <label class="floating-label" for="posteE">Poste</label>
+                                <input type="text" class="form-control" id="posteE" placeholder="Poste (ex:Directeur)">
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <label class="floating-label" for="entrepriseE">Entreprise</label>
+                                <div class="input-group input-group-icon">
+                                    <span class="input-group-addon">
+                                      <span class="icon fa-bank" aria-hidden="true"></span>
+                                    </span>
+                                    <input type="text" class="form-control" id="entrepriseE" placeholder="nome de l'entreprise (ex:Microsoft)">
+                                </div>
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <label class="floating-label" for="inputName">Lieu</label>
+                                <input type="email" class="form-control" id="lieuE" placeholder="Lieu (ex:France,Pris)">
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <!-- Example Date Range -->
+                                <label class="floating-label" for="inputName">Période</label>
+                                <div class="input-daterange" data-plugin="datepicker">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                          <i class="icon md-calendar" aria-hidden="true"></i>
+                                        </span>
+                                        <input type="text" class="form-control" id="startE">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">to</span>
+                                        <input type="text" class="form-control" id="endE">
+                                    </div>
+                                </div>
+                                <!-- End Example Date Range -->
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <label class="floating-label" for="descriptionE">description</label>
+                                <textarea class="form-control" rows="5" id="descriptionE"></textarea>
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <label class="floating-label" for="mediaE">Médias</label>
+                                <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                    <input type="text" class="form-control" readonly="">
+                                    <span class="input-group-btn">
+                                    <span class="btn btn-success btn-file waves-effect waves-light waves-round waves-effect waves-light waves-round">
+                                      <i class="icon md-upload" aria-hidden="true"></i>
+                                      <input type="file" name="mediaE" multiple="">
+                                    </span>
+                                  </span>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 form-group">
+                                <button type="button" class="btn btn-primary waves-effect waves-light waves-round waves-effect waves-light waves-round" id="addExp">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+
+{% endblock %}
+{% block javascripts %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var fileName ;
+           $('input[type="file"]').change(function(e){
+                fileName = e.target.files[0].name;
+            });
+            $('#addExp').click(function () {
+                var poste = $('#posteE').val();
+                var entreprise = $('#entrepriseE').val();
+                var lieu = $('#lieuE').val();
+
+                var from1 = $('#startE').val();
+                var to = $('#endE').val();
+                var description = $('#descriptionE').val();
+                to = to.replace("/","-");
+                to = to.replace("/","-");
+                from1 = from1.replace("/","-");
+                from1 = from1.replace("/","-");
+                fileName = fileName.replace(".","-");
+
+                alert('wey The file "' + fileName +  '" has been selected.');
+                var url80 = '{{ path("addExp", {'poste':'poste',  'entreprise' :'entreprise', 'lieu':'lieu' ,'from':'from','to':'to','description':'description' , 'filename':'filename'}) }}';
+                $.ajax({
+                    url: url80.replace("poste", poste).replace("entreprise",entreprise).replace("lieu",lieu).replace('from',from1).replace('to',to).replace('description',description).replace('filename',fileName
+                    ),
+                    success: function (result) {
+                        setTimeout(function(){// wait for 5 secs(2)
+                            location.reload(); // then reload the page.(3)
+                        }, 1000);
+
+                    } })
+
+
+                });
+            $(".btn-pure").click(function () {
+                var id = $(this).attr('id');
+                if (id.indexOf('delete') != -1) {
+                    alert("delete");
+                    id = id.replace("delete","");
+                    var url4 = '{{ path("delete_exp", {'id': 'id'}) }}';
+                    $.ajax({
+                        url: url4.replace("id", id),
+                        success: function (result) {
+
+                            var test = "listExperance";
+                            var c = test + id;
+                            $('#' + c).fadeOut();
+                        } })
+                }
+                if (id.indexOf('delete') != -1) {
+                    alert("delete");
+                    id = id.replace("delete","");
+                    var url4 = '{{ path("delete_exp", {'id': 'id'}) }}';
+                    $.ajax({
+                        url: url4.replace("id", id),
+                        success: function (result) {
+
+                            var test = "listExperance";
+                            var c = test + id;
+                            $('#' + c).fadeOut();
+                        } })
+                }
+            })
+
+
+
+            });
+
+    </script>
+
+{% endblock %}

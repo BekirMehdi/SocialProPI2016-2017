@@ -1,0 +1,116 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+    <div class="app-projects">
+        <div class="page-header">
+            <h1 class="page-title">Projects</h1>
+            <div class="page-header-actions">
+                <form>
+                    <div class="input-search input-search-dark">
+                        <i class="input-search-icon md-search" aria-hidden="true"></i>
+                        <input type="text" class="form-control" name="" placeholder="Search...">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="projects-sort">
+                <span class="projects-sort-label">Sorted by : </span>
+                <div class="inline-block dropdown">
+          <span id="projects-menu" data-toggle="dropdown" aria-expanded="false" role="button">
+            Dropdown
+            <i class="icon md-chevron-down" aria-hidden="true"></i>
+          </span>
+                    <div class="dropdown-menu animation-scale-up animation-top-left animation-duration-250"
+                         aria-labelledby="projects-menu" role="menu">
+                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">Sort One</a>
+                        <a class="active dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">Sort Two</a>
+                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">Sort Three</a>
+                    </div>
+                </div>
+            </div>
+            <div class="projects-wrap">
+                <ul class="blocks blocks-100 blocks-xxl-5 blocks-lg-4 blocks-md-3 blocks-sm-2"
+                    data-plugin="animateList" data-child=">li">
+                    {% for projet in projets %}
+                        <li>
+                            <div class="panel">
+                                <figure class="overlay overlay-hover animation-hover">
+                                    <img class="caption-figure overlay-figure imgMod" src="{{ asset(projet.getImage().AssetPath) }}">
+                                    <figcaption class="overlay-panel overlay-background overlay-fade text-center vertical-align">
+                                        <div class="btn-group">
+                                            <div class="dropdown float-left">
+                                                <button type="button" class="btn btn-icon btn-pure btn-default" title="Setting"><i class="icon md-settings" aria-hidden="true"></i></button>
+                                                <div class="dropdown-menu" role="menu">
+                                                    <a class="dropdown-item" href="">Copy</a>
+                                                    <a class="dropdown-item" href="">Rename</a>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-icon btn-pure btn-default" title="Delete"
+                                                    data-tag="project-delete"><i class="icon md-delete" aria-hidden="true"></i></button>
+                                        </div>
+                                        <a href="{{ path('frontProjetDetails', { 'id' : projet.getIdPo() }) }}"><button type="button" class="btn btn-inverse project-button">View Project</button></a>
+                                        <button type="button" class="btn btn-inverse project-button">View Project</button>
+                                    </figcaption>
+                                </figure>
+                                <div class="time float-right">June 22, 2017</div>
+                                <div class="text-truncate">{{ projet.name }}</div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <nav>
+                <ul class="pagination pagination-no-border">
+                    {{ knp_pagination_render(projets) }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- Site Action -->
+    <div class="site-action" data-target="#addProjectForm" data-toggle="modal" data-plugin="actionBtn">
+        <button type="button" data-action="add" class="site-action-toggle btn-raised btn btn-success btn-floating waves-effect">
+            <i class="icon md-plus" aria-hidden="true"></i>
+        </button>
+    </div>
+    <!-- End Site Action -->
+    <!-- Add Project Form -->
+    <div class="modal fade" id="addProjectForm" aria-labelledby="addProjectForm" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Create New Project</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="post" role="form">
+                        <div class="form-group">
+                            <label class="form-control-label mb-15" for="name">Project name:</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Project name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label mb-15" for="name">Project description:</label>
+                            <textarea class="form-control mb-sm" placeholder="Project description." rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label mb-15" for="name">Choice people to your project:</label>
+                            <select multiple="multiple" class="plugin-selective" style="display: none;"><option value="uid_1">Herman Beck</option><option value="uid_2">Caleb Richards</option></select><div class="addMember">
+                                <ul class="addMember-items"><li class="addMember-item"><img class="avatar" src="../../../../global/portraits/1.jpg"><span class="addMember-remove"><i class="md-minus-circle"></i></span></li><li class="addMember-item"><img class="avatar" src="../../../../global/portraits/2.jpg"><span class="addMember-remove"><i class="md-minus-circle"></i></span></li></ul>
+                                <div class="addMember-trigger">
+                                    <div class="addMember-trigger-button"><i class="md-plus"></i></div>
+                                    <div class="addMember-trigger-dropdown">
+                                        <ul class="addMember-list"><li class="addMember-list-item addMember-selected"><img class="avatar" src="../../../../global/portraits/1.jpg">Herman Beck</li><li class="addMember-list-item addMember-selected"><img class="avatar" src="../../../../global/portraits/2.jpg">Mary Adams</li><li class="addMember-list-item"><img class="avatar" src="../../../../global/portraits/3.jpg">Caleb Richards</li><li class="addMember-list-item"><img class="avatar" src="../../../../global/portraits/4.jpg">June Lane</li></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer text-right">
+                    <button class="btn btn-primary waves-effect" data-dismiss="modal" type="button">Creat</button>
+                    <a class="btn btn-sm btn-white btn-pure waves-effect" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap-extend.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("assets/css/site.min.css")}}">
+
+    <link rel="stylesheet" href="{{ asset("assets/examples/css/tables/basic.css")}}">
+    <div class="panel">
+
+
+        <div class="col-lg-6">
+            <!-- Example Bordered Table -->
+            <div class="example-wrap">
+
+
+                <div class="example table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Id tache</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for task in tasks %}
+                            <tr style="width: 50%">
+                                <td><a href="{{ path('tasks_show', { 'id': task.getIdTa() }) }}">{{ task.getIdTa() }}</a></td>
+                                <td>{{ task.getName() }}</td>
+                                <td>{{ task.getDescription() }}</td>
+                                <td>{{ task.getStatus }}</td>
+                                <td class="text-nowrap">
+                                    <button onclick="location.href='{{ path('tasks_show', { 'id': task.getIdTa() }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                            data-original-title="Show">
+                                        <i class="icon md-plus" aria-hidden="true"></i>
+                                    </button>
+
+                                    <button onclick="location.href='{{ path('tasks_edit', { 'id': task.getIdTa() }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                            data-original-title="Edit">
+                                        <i class="icon md-wrench" aria-hidden="true"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class=" " >
+                        {{ knp_pagination_render(tasks) }}
+                    </div>
+
+                    <button onclick="location.href='{{ path('tasks_new') }}' " type="submit" class="btn btn-primary" value="New">Create a new Task</button><br><br>
+                    <button onclick="location.href='{{ path('tasks_chart') }}' " type="submit" class="btn btn-primary" value="New">Pie chart</button><br><br>
+                    <button onclick="location.href='{{ path('custom_task') }}' " type="submit" class="btn btn-primary" value="New">TaskBoard</button>
+
+
+                </div>
+            </div>
+            <!-- End Example Bordered Table -->
+        </div>
+    </div>
+    <!-- Load jQuery from Google's CDN if needed -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
+    <script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
+    <script type="text/javascript">
+
+    </script>
+
+    <div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+
+{% endblock %}

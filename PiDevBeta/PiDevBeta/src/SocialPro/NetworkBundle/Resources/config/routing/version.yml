@@ -1,0 +1,37 @@
+versionsprojet_index:
+    path:     /afficher
+    defaults: { _controller: "SocialProNetworkBundle:VersionsProjet:index" }
+    methods:  GET
+
+versionsprojet_show:
+    path:     /{idVp}/show
+    defaults: { _controller: "SocialProNetworkBundle:VersionsProjet:show" }
+    methods:  GET
+
+versionsprojet_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:VersionsProjet:AjouterVersion" }
+    methods:  [GET, POST]
+
+versionsprojet_edit:
+    path:     /{idVp}/edit
+    defaults: { _controller: "SocialProNetworkBundle:VersionsProjet:edit" }
+    methods:  [GET, POST]
+
+versionsprojet_delete:
+    path:     /{idVp}/delete
+    defaults: { _controller: "SocialProNetworkBundle:VersionsProjet:delete" }
+    methods:  DELETE
+
+versionsprojet_AjaxFichier:
+    path:     /{nomFichier}/{numSprint}
+    defaults: { _controller: "SocialProNetworkBundle:VersionsProjet:nbrFichier" }
+    methods:  GET
+
+versionsprojet_AjaxModifierVue:
+    path:     /{idactalite}
+    defaults: { _controller: "SocialProNetworkBundle:VersionsProjet:modifiervue" }
+    methods:  GET
+
+
+

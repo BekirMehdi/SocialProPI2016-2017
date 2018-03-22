@@ -1,0 +1,53 @@
+posts_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:index" }
+    methods:  [GET, POST]
+
+post_like:
+    path:     /like/{id}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:like" }
+    methods:  [GET, POST]
+
+post_dislike:
+    path:     /dislike/{id}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:dislike" }
+    methods:  [GET, POST]
+
+add_comment:
+    path:     /comment/{id}/{content}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:addComment" }
+    methods:  [GET, POST]
+
+delete_comment:
+    path:     /delete/comment/{id}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:deleteComment" }
+    methods:  [GET, POST]
+
+edit_comment:
+    path:     /edit/comment/{id}/{content}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:editComment" }
+    methods:  [GET, POST]
+
+delete_post:
+    path:     /delete/post/{id}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:deletePost" }
+    methods:  [GET, POST]
+
+edit_post:
+    path:     /edit/post/{id}/{content}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:editPost" }
+    methods:  [GET, POST]
+
+display:
+    path:     /user/{id}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:display" }
+    methods:  [GET, POST]
+
+follow:
+    path:     /follow/{id}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:follow" }
+    methods:  [GET, POST]
+unfollow:
+    path:     /unfollow/{id}
+    defaults: { _controller: "SocialProNetworkBundle:PostsWeb:unfollow" }
+    methods:  [GET, POST]

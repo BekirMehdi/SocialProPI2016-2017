@@ -1,0 +1,51 @@
+social_pro_network_homepage:
+    path:     /
+    defaults: { _controller: SocialProNetworkBundle:Default:index }
+myProfile:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/cv.yml"
+    prefix:   /myprofile
+accueil:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/accueil.yml"
+    prefix:   /accueil
+
+myapp_social_pro_adminSprints:
+     resource: "@SocialProNetworkBundle/Resources/config/routing/sprints.yml"
+     prefix:   /adminSprints
+
+
+myapp_social_pro_adminUserStories:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/userstories.yml"
+    prefix:   /adminUserStories
+
+myapp_social_pro_adminTasks:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/tasks.yml"
+    prefix:   /adminTasks
+
+myapp_social_pro_adminEvents:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/events.yml"
+    prefix:   /adminEvents
+
+myapp_social_pro_adminLieu:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/lieu.yml"
+    prefix:   /adminLieu
+
+myapp_social_pro_adminMeetings:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/meetings.yml"
+    prefix:   /adminMeetings
+
+routingGestionIssues:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/issues.yml"
+    prefix:   /admin/gestionIssues
+
+routingGestionProjet:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/projets.yml"
+    prefix:   /admin/gestionProjet
+
+myapp_social_pro_adminTeams:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/teams.yml"
+    prefix:   /adminTeams
+
+routingGestionVersion:
+    resource: "@SocialProNetworkBundle/Resources/config/routing/version.yml"
+    prefix:   /version
+

@@ -1,0 +1,81 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+  {% block body %}
+      <div class="panel">
+          <header class="panel-heading">
+              <h3 class="panel-title">Liste de probleme</h3>
+          </header>
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="mb-15">
+                          <a href="{{ path('adminIssues_new') }}">
+                              <button id="addToTable" class="btn btn-primary" type="button">
+                                  <i class="icon md-plus" aria-hidden="true"></i> creér nouveau problme
+                              </button>
+                          </a>
+                      </div>
+                  </div>
+
+              </div>
+              <table class="table table-bordered table-hover table-striped" cellspacing="0" id="exampleAddRow">
+                  <thead>
+                  <tr>
+                      <th>Type</th>
+                      <th>Priority</th>
+                      <th>Resolution</th>
+                      <th>Security level</th>
+                      <th>Symptom severity</th>
+                      <th>Date_creation</th>
+                      <th>redigé par</th>
+                      <th>assigneer à</th>
+                      <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for issue in issues %}
+                      <tr class="gradeA">
+                          <td>{{ issue.type }}</td>
+                          <td>
+                              <span class="badge badge-pill badge-dark">{{ issue.priority }}</span>
+                          </td>
+                          <td class="hidden-sm-down">
+                              <span class="badge badge-primary">{{ issue.resolution }}</span>
+                          </td>
+                          <td>
+                              <div class="badge badge-table badge-success">{{ issue.securityLevel }}</div>
+                          </td>
+                          <td class="hidden-sm-down">
+                              <span class="badge badge-danger">{{ issue.symptomSeverity }}</span>
+                          </td>
+                          <td>
+                              <span>{% if issue.datecreation%}{{ issue.datecreation|date('Y-m-d H:i:s') }}{% endif %}</span>
+                              <i class="icon md-time ml-10" aria-hidden="true"></i>
+                          </td>
+                          <td>
+                              <img class="avatar avatar-sm" src="{{ asset(issue.reporter.getImg().AssetPath) }}" data-toggle="tooltip" data-original-title="{{ issue.reporter.username }}" data-container="body" title="">{{ issue.reporter.username }}
+                          </td>
+                          <td>
+                              <img class="avatar avatar-sm" src="{{ asset(issue.assigneer.getImg().AssetPath) }}" data-toggle="tooltip" data-original-title="{{ issue.assigneer.username }}" data-container="body" title="">{{ issue.assigneer.username }}
+                          </td>
+                          <td class="actions">
+                              <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-editing save-row"
+                                 data-toggle="tooltip" data-original-title="Save" hidden><i class="icon md-wrench" aria-hidden="true"></i></a>
+                              <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-editing cancel-row"
+                                 data-toggle="tooltip" data-original-title="Delete" hidden><i class="icon md-close" aria-hidden="true"></i></a>
+                              <a href="{{ path('adminIssues_edit', { 'id': issue.idIss }) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
+                                 data-toggle="tooltip" data-original-title="Edit"><i class="icon md-edit" aria-hidden="true"></i></a>
+                              <a href="{{ path('adminIssues_show', { 'id': issue.idIss }) }}" class="btn btn-sm btn-icon btn-pure btn-default on-editing save-row"
+                                 data-toggle="tooltip" data-original-title="save"><i class="icon md-wrench" aria-hidden="true"></i></a>
+                          </td>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+              <ul class="pagination pagination-no-border">
+                  {{ knp_pagination_render(issues) }}
+              </ul>
+          </div>
+      </div>
+
+  {% endblock %}

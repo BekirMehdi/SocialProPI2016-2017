@@ -1,0 +1,51 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+    <div class="page-header">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('adminProjets_index') }}">Acueil</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Equipe</a></li>
+            <li class="breadcrumb-item active">details</li>
+        </ol>
+        <div class="page-header-actions">
+            <a class="btn btn-sm btn-primary btn-round waves-effect" href="{{ path('adminTeams_index') }}">
+                <i class="icon md-link" aria-hidden="true"></i>
+                <span class="hidden-sm-down">Retour a la liste</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-12 col-xxl-12">
+        <div class="pricing-list text-left">
+            <div class="pricing-header bg-blue-600">
+                <div class="pricing-title">Equipe</div>
+            </div>
+            <ul class="pricing-features">
+                <li>
+                    <strong>id Equipe</strong> {{ team.idEq }}
+                </li>
+                <li>
+                    <strong>nom</strong>{{ team.name }}
+                </li>
+                <li>
+                    <strong>Date creation</strong>      <span>{% if team.dateCreation %}{{ team.dateCreation|date('Y-m-d') }}{% endif %}</span>
+                    <i class="icon md-time ml-10" aria-hidden="true"></i>
+                </li>
+                <li>
+                    <strong>Statut</strong> {{ team.status }}
+
+            </ul>
+            <div class="form-group form-material row">
+                <div class="col-md-9 offset-md-3">
+                    <a class="btn btn-primary btn-outline float-right waves-effect" href="{{ path('adminTeams_edit', { 'id': team.idEq }) }}" data-wizard="next" role="button">modifiér</a>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn-default btn waves-effect">Supprimer</button>
+                    {{ form_end(delete_form) }}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% endblock %}
+

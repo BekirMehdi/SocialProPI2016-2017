@@ -1,0 +1,24 @@
+adminSprints_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:Sprints:index" }
+    methods:  GET
+
+adminSprints_show:
+    path:     /{id}/show
+    defaults: { _controller: "SocialProNetworkBundle:Sprints:show" }
+    methods:  GET
+
+adminSprints_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:Sprints:new" }
+    methods:  [GET, POST]
+
+adminSprints_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SocialProNetworkBundle:Sprints:edit" }
+    methods:  [GET, POST]
+
+adminSprints_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SocialProNetworkBundle:Sprints:delete" }
+    methods:  DELETE

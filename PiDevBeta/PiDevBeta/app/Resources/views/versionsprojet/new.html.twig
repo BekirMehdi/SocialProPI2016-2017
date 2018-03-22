@@ -1,0 +1,156 @@
+{% extends 'show1.html.twig' %}
+{% block content %}
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
+           aria-expanded="false" data-animation="scale-up" role="button">
+            <i class="icon md-notifications" aria-hidden="true"></i>
+            <span class="badge badge-pill badge-danger up" id="1" onclick="mettreAzero(this)">{{ nbrvue }}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+            <div class="dropdown-menu-header">
+                <h5>Activités récentes </h5>
+                <span class="badge badge-round badge-danger" id="2" >Nouveau {{ nbrvue }}</span>
+            </div>
+            <div class="list-group">
+                <div data-role="container">
+                    <div data-role="content">
+                        {% for activites in listactivites %}
+                            <a class="list-group-item dropdown-item" href="javascript:void(0)" role="menuitem">
+                                <div class="media">
+                                    <div class="pr-10">
+                                        <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+
+                                        <input id={{ activites.idAc }}  class="ajax"  value="{{ activites.idAc }}" >
+                                        <h5 class="media-heading" onclick="marquervu(this)" >{{ activites.username }} {{ activites.description }}</h5>
+                                        <time class="media-meta" datetime="2017-06-10T13:50:18+08:00">{{ activites.date|date('Y-m-d') }}</time>
+
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown-menu-footer">
+                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                    <i class="icon md-settings" aria-hidden="true"></i>
+                </a>
+                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                    All notifications
+                </a>
+            </div>
+        </div>
+    </li>
+{% endblock %}
+{% block body %}
+    <script type="text/javascript">
+        function selectChange(element) {
+
+            var num=parseInt(element.options[element.selectedIndex].value);
+            ++num;
+            document.getElementById("numversion").innerHTML=num+".0";
+        }
+
+        function fileChange(element) {
+
+            var strFichier=document.getElementById("fichier").value;
+            var nomFichier=strFichier.substring(12, strFichier.length);
+
+            var numSprint=document.getElementById("numsprint").options[document.getElementById("numsprint").selectedIndex].value;
+            var xhr;
+            xhr=new XMLHttpRequest();
+            xhr.onreadystatechange=function  ()
+            {
+                if (xhr.readyState==4 && xhr.status==200)
+                {
+                    var numVersionFinal =document.getElementById("numversion").innerHTML+'.'+((parseInt(xhr.responseText)+1).toString());
+                    document.getElementById("numversion").innerHTML=numVersionFinal;
+                    document.getElementById("numversion2").value=numVersionFinal;
+                }
+            }
+            var url='{{ path('versionsprojet_AjaxFichier', {'nomFichier': 'nomFichier', 'numSprint':'numSprint'}) }}';
+            url = url.replace("nomFichier", nomFichier);
+            url = url.replace("numSprint", numSprint);
+
+            xhr.open("GET",url,true);
+
+            xhr.send();
+
+
+        }
+
+    </script>
+
+
+    <h1>la création d'une nouvelle version </h1>
+
+
+    <form method="POST" action="">
+        <table>
+            <tr>
+                <th>Nom du projet</th>
+                {% for i in x  %}
+                    <td name="nomprojet">{{ i.name }}</td>
+                {% endfor %}
+
+            <tr>
+                <td id="label"> Numéro du sprint: </td>
+                <td>
+                    <select id="numsprint" name="numsprint" onchange="selectChange(this)">
+                        {% for a in y  %}
+                            <option value="{{ a.number }}">{{ a.number }}</option>
+                        {% endfor %}
+                     </select>
+                </td>
+            </tr>
+            <tr>
+                <td id="label"> Fichier: </td> <td> <input  id="fichier" name="fichier" type="file" onchange="fileChange(this)" required></td>
+            </tr>
+            <tr>
+                <td id="label"> Numéro de la version : </td> <td> <div id="numversion" name="numversion"></div></td>
+
+                <input id="numversion2" name="numversion2" type="hidden"> </input>
+            </tr>
+            <tr>
+            <td id="label"> Date : </td> <td> <input name="date" id="date" type="datetime-local" required></td>
+            </tr>
+            <tr>
+                <td id="label"> Description: </td> <td> <textarea name="description" required> </textarea></td>
+            </tr>
+        </table>
+
+        <button id="activites"   type="submit"> Créer une nouvelle version  </button>
+    </form>
+    <ul>
+        <li>
+            <a href="{{ path('versionsprojet_index') }}">Back to the list</a>
+        </li>
+
+    </ul>
+    <div id="1"></div>
+
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        function mettreAzero(element) {
+            document.getElementById("1").innerHTML="0";
+            document.getElementById("2").innerHTML="Nouveau 0";
+        }
+
+        function marquervu(element) {
+
+            var idac=document.getElementById("activites.idAc");
+            var xhr;
+            xhr = new XMLHttpRequest();
+
+            var url = '{{ path('versionsprojet_AjaxModifierVue', {'idactalite':'idactalite'}) }}';
+            url = url.replace("idactalite", idac);
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
+    </script>
+{% endblock %}
+

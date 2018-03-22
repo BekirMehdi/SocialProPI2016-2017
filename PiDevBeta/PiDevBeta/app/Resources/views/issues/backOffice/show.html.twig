@@ -1,0 +1,66 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+    <div class="page-header">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('adminProjets_index') }}">Acueil</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Probleme</a></li>
+            <li class="breadcrumb-item active">details</li>
+        </ol>
+        <div class="page-header-actions">
+            <a class="btn btn-sm btn-primary btn-round waves-effect" href="{{ path('adminIssues_index') }}">
+                <i class="icon md-link" aria-hidden="true"></i>
+                <span class="hidden-sm-down">Retour a la liste</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-12 col-xxl-12">
+        <div class="pricing-list text-left">
+            <div class="pricing-header bg-blue-600">
+                <div class="pricing-title">Probleme</div>
+            </div>
+            <ul class="pricing-features">
+                <li>
+                    <strong>id probleme</strong> {{ issue.idIss }}
+                </li>
+                <li>
+                    <strong>Type</strong>{{ issue.type }}
+                </li>
+                <li>
+                    <strong>Priorité</strong>    {{ issue.priority }}
+                </li>
+
+                <li>
+                    <strong>Description</strong>    {{ issue.description }}
+                </li>
+                <li>
+                    <strong>Resolution</strong>     {{ issue.resolution }}
+                </li>
+                <li>
+                    <strong>Resumé</strong> {{ issue.summary }}
+                <li>
+                    <strong>Niveau de sécurité</strong>{{ issue.securityLevel }}
+                </li>
+                <li>
+                    <strong>Symptôme Gravité</strong>{{ issue.symptomSeverity }}
+                </li>
+                <li>
+                    <strong>Date creation</strong>      <span>{% if issue.datecreation %}{{ issue.datecreation|date('Y-m-d H:i:s') }}{% endif %}</span>
+                    <i class="icon md-time ml-10" aria-hidden="true"></i>
+                </li>
+            </ul>
+            <div class="form-group form-material row">
+                <div class="col-md-9 offset-md-3">
+                    <a class="btn btn-primary btn-outline float-right waves-effect" href="{{ path('adminIssues_edit', { 'id': issue.idIss }) }}" data-wizard="next" role="button">modifiér</a>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn-default btn waves-effect">Supprimer</button>
+                    {{ form_end(delete_form) }}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+

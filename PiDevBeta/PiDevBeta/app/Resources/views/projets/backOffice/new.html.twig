@@ -1,0 +1,68 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+    <div class="page-header">
+        <h1 class="page-title">creation de projets</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('adminProjets_index') }}">Acueil</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Projet</a></li>
+            <li class="breadcrumb-item active">Ajout</li>
+        </ol>
+        <div class="page-header-actions">
+            <a class="btn btn-sm btn-primary btn-round waves-effect" href="{{ path('adminProjets_index') }}">
+                <i class="icon md-link" aria-hidden="true"></i>
+                <span class="hidden-sm-down">Retour a la liste</span>
+            </a>
+        </div>
+    </div>
+    <div class=" page-content container-fluid col-md-12">
+        <div class="panel">
+            {{ form_start(form) }}
+            <div class="panel-body container-fluid">
+                <div class="form-group form-material " data-plugin="formMaterial">
+                    <label class="form-control-label">nom</label>
+                    {{ form_widget(form.name) }}
+                </div>
+                <div class="form-group form-material " data-plugin="formMaterial">
+                    <label class="form-control-label" for="inputGrid1"> Date limite</label>
+                </div>
+                {{ form_widget(form.datelimite) }}
+
+                <div class="form-group form-material " data-plugin="formMaterial">
+                    <label class="form-control-label" for="inputGrid1">Date depart</label>
+                </div>
+                {{ form_widget(form.datestart) }}
+
+                <div class="form-group form-material " data-plugin="formMaterial">
+                    <label class="form-control-label">Description</label>
+                    {{ form_widget(form.description) }}
+                </div>
+                <div class="form-group form-material " data-plugin="formMaterial">
+                    <label class="form-control-label">Acces</label>
+                    {{ form_widget(form.access) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <label class="form-control-label">progression</label>
+                    {{ form_widget(form.progression) }}
+                </div>
+                <div class="form-group form-material form-material-file" data-plugin="formMaterial">
+                    <label class="form-control-label">Browse..</label>
+                    <input type="text" class="form-control" readonly="">
+                    {{ form_widget(form.image) }}
+                </div>
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <label class="form-control-label">entreprise</label>
+                    {{ form_widget(form.identreprise) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <label class="form-control-label">equipe</label>
+                    {{ form_widget(form.idteam) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <button type="submit" class="btn btn-primary waves-effect" id="validateButton1" value="Create">ajouter</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

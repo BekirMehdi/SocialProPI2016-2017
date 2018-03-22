@@ -1,0 +1,291 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+    <div class=" ">
+        <!-- Notebook Sidebar -->
+        <script src="{{ asset("lib/jquery/jquery.js")}}"></script>
+        <script src="{{ asset("lib/jquery/issues.js")}}"></script>
+    <div class=" app-notebook page-aside-scroll page-aside-left">
+        <div class="page-aside">
+            <div class="page-aside-switch">
+                <i class="icon md-chevron-left" aria-hidden="true"></i>
+                <i class="icon md-chevron-right" aria-hidden="true"></i>
+            </div>
+            <div class="page-aside-inner">
+                <div class="input-search">
+                    <form method="post">
+                        <button class="input-search-btn" type="submit">
+                            <i class="icon md-search" aria-hidden="true"></i>
+                        </button>
+
+                        <input class="form-control" type="text" placeholder="Search Keyword" name="search">
+                    </form>
+                </div>
+                <div class="app-notebook-list page-aside-scroll">
+                    <div data-role="container">
+                        <div data-role="content">
+                            <ul class="list-group">
+                                {% for issue in issues %}
+                                    <a href="{{ path('detailsIssues', { 'idIss' : issue.idIss }) }}">
+                                        <li id="{{ issue.idIss}}" class="list-group-item active mehdi" data-toggle="context" data-target="#contextMenu">
+                                            <h4 class="list-group-item-heading mt-0">{{ issue.type}}</h4>
+                                            <p class="list-group-item-text">{{ issue.summary}}.</p>
+                                            <div class="info">
+                                                <i class="icon md-folder "></i>
+                                                <span class="category">CSS</span>
+                                                <span class="time">{{ issue.dateCreation|date('Y-m-d H:i:s') }}</span>
+                                            </div>
+                                        </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Notebook Sidebar -->
+        <div class="page-main">
+            <!--markdown  START-->
+            <div class="col-xxl-3 col-xl-12 col-lg-12">
+                <div class="card">
+                    <div class="card-block">
+                        <p>
+                        <div class="media">
+                            <div class="pr-20">
+                                <a class="avatar " href="javascript:void(0)">
+                                    <a href="javascript:void(0)" class="avatar avatar-sm text-middle">
+                                        <img style="height: 30px" src="{{ asset(issu.idprojet.getImage().AssetPath) }}">
+                                    </a>
+
+                            </div>
+                            <div class="media-body typeIssue">
+
+                        <p> <span class="media-time">{{ issu.idprojet.name }}/Probleme-{{ issu.idIss }}</span></p>
+                        <p> <span class="media-time">{{ issu.summary }}</span></p>
+                            </div>
+                            <div class="pl-20">
+                                <span class="badge badge-pill badge-danger"></span>
+                            </div>
+                        </div>
+                        </p>
+                        <div class="progress progress-xs mb-10">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="card-block project-participators" style="width: 400px">
+                                    <h4 class="project-option-title">Details</h4>
+                                    <div class="media">
+                                        <div class="pr-20">
+                          <span>Type:
+                              <span>
+                        </span></span></div>
+                                        <div class="media-body">
+                                            <a class="media-content">
+                                                <span>{{ issu.type }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="pr-20">
+                          <span>Priority:
+                            <span>
+                        </span></span></div>
+                                        <div class="media-body">
+                                            <a class="media-content">
+                                                <span>{{ issu.priority }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="pr-20">
+                          <span>Resolution:
+                            <span>
+                        </span></span></div>
+                                        <div class="media-body">
+                                            <a class="media-content">
+                                                <span>{{ issu.resolution }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="pr-20">
+                          <span>Level Security:
+                            <span>
+                        </span></span></div>
+                                        <div class="media-body">
+                                            <a class="media-content">
+                                                <span>{{ issu.securityLevel }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="pr-20">
+                          <span>Symptôme gravité:
+                            <span>
+                        </span></span></div>
+                                        <div class="media-body">
+                                            <a class="media-content">
+                                                <span>{{ issu.symptomSeverity }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="card-block project-participators">
+                                    <h4 class="project-option-title">Membres</h4>
+                                    <div class="media mt-0">
+                                        <div class="pr-20 text-middle">
+                                            <span>Assigneer</span>
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="javascript:void(0)" class="avatar avatar-sm text-middle">
+                                                <img src="{{ asset(issu.assigneer.getImg().AssetPath) }}">
+                                            </a>
+                                            <span class="font-size-16 ml-5">{{ issu.assigneer.username }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="pr-20 text-middle">
+                                            <span>rédiger par</span>
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="javascript:void(0)" class="avatar avatar-sm text-middle">
+                                                <img src="{{ asset(issu.reporter.getImg().AssetPath) }}">
+                                            </a>
+                                            <span class="font-size-16 ml-5">{{ issu.reporter.username }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-block project-dates">
+                                    <h4 class="project-option-title">Date</h4>
+                                    <p class="mb-10">
+                                        <span>creation:</span>
+                                        {{ issu.dateCreation |date('Y-m-d H:i:s')}}
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+            <!-- Site Action -->
+            <div class="site-action" data-plugin="actionBtn">
+                <a href="{{ path('issuesPDF',{id: issu.idIss }) }}" class="dropdown-item" tabindex="-1">
+                <button type="button" data-action="folder" class="btn-raised btn btn-success btn-floating animation-slide-bottom">
+                    <i class="icon md-print" aria-hidden="true"></i>
+                </button>
+                </a>
+            </div>
+
+            <div id="contextMenu">
+                <div class="dropdown-menu" role="menu">
+
+
+                   <i class="icon md-print" aria-hidden="true"></i> Print
+
+                </div>
+            </div>
+            <!--contextMenu END-->
+
+            <!--markdown  END-->
+        </div>
+        <!-- Site Ac
+        <div class="site-action" data-plugin="actionBtn">
+            <button type="button" class="site-action-toggle btn-raised btn btn-success btn-floating">
+                <i class="front-icon md-plus animation-scale-up" aria-hidden="true"></i>
+                <i class="back-icon md-close animation-scale-up" aria-hidden="true"></i>
+            </button>
+            <div class="site-action-buttons">
+                <button type="button" data-action="trash" class="btn-raised btn btn-success btn-floating animation-slide-bottom">
+                    <i class="icon md-delete" aria-hidden="true"></i>
+                </button>
+                <button type="button" data-action="folder" class="btn-raised btn btn-success btn-floating animation-slide-bottom">
+                    <i class="icon md-print" aria-hidden="true"></i>
+                </button>
+                <button type="button" data-action="folder" class="btn-raised btn btn-success btn-floating animation-slide-bottom">
+                    <i class="icon md-share" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <!-- End Site Action
+        <div class="app-notebook-list page-aside-scroll">
+            <div data-role="container">
+                <div data-role="content">
+
+                    <div class="modal fade" id="addNewNote" aria-hidden="true" aria-labelledby="addNewNote"
+                         role="dialog" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title">Creation de nouveau probleme</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST">
+                                        <div class="form-group form-material" data-plugin="formMaterial">
+                                            <label class="form-control-label" for="select">Projet</label>
+                                            <select name="projets" class="form-control empty">
+                                                <option>&nbsp;</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group form-material" data-plugin="formMaterial">
+                                            <label class="form-control-label" for="select">Type Probleme</label>
+                                            <select name="bug" class="form-control empty">
+                                                <option value="">&nbsp;</option>
+                                                <option value="Bug">Bug</option>
+                                                <option value="New Feature">New Feature</option>
+                                                <option value="Improvement">Improvement</option>
+                                                <option value="Support request">Support request</option>
+                                                <option value="Story">Story</option>
+                                                <option value="Epic">Epic</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group form-material" data-plugin="formMaterial">
+                                            <label class="form-control-label" for="select">Priorité</label>
+                                            <select name="priority" class="form-control empty">
+                                                <option value="">&nbsp;</option>
+                                                <option value="basse priorité">basse priorité</option>
+                                                <option value="moyenne priorité">moyenne priorité</option>
+                                                <option value="haute priorité">haute priorité</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group form-material" data-plugin="formMaterial">
+                                            <label class="form-control-label" for="textarea">Description</label>
+                                            <textarea class="form-control" id="textarea" name="textarea" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group form-material" data-plugin="formMaterial">
+                                            <label class="form-control-label" for="select">Projet</label>
+                                            <select name="users" class="form-control empty">
+                                                <option value="">&nbsp;</option>
+
+                                            </select>
+                                        </div>
+                                        <input type="submit" value="ajouter">
+                                    </form>
+                                </div>
+                                <div class="modal-footer text-left">
+                                    <button class="btn btn-primary" data-dismiss="modal" type="submit">Create</button>
+                                    <a class="btn btn-sm btn-white btn-pure" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ -->
+
+{% endblock %}

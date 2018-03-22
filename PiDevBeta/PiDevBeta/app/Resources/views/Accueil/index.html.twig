@@ -1,0 +1,532 @@
+{% extends ':Accueil:base.html.twig' %}
+{% block body %}
+    <div class="page">
+        <div class="page-content container-fluid">
+            <div class="row">
+                <div class="col-lg-8" id="interface">
+
+                    <div class="card card-shadow wall-posting">
+                        <div class="card-block p-0">
+                            <div class="form-group mb-0">
+                                {{ form_start(formP) }}
+                                {{ form_widget(formP.contenu, {'attr':{'class':'form-control','placeholder':'Whats in your mind today?'}}) }}
+
+                                <div class="p-10">
+                                    <button class="btn btn-pure btn-default icon md-image" type="button" name="button"></button>
+                                    <button class="btn btn-pure btn-default icon md-tv-play" type="button" name="button"></button>
+                                    <button class="btn btn-pure btn-default icon md-calendar" type="button" name="button"></button>
+                                    <button class="btn btn-pure btn-default icon md-map" type="button" name="button"></button>
+                                    <button class="btn btn-primary btn-round submit float-right mr-10" type="submit">
+                                        Post
+                                    </button>
+                                    {{ form_end(formP) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% for post in postsWeb %}
+                        <div class="card card-shadow" id="myPost{{ post.idPo }}">
+                            <div class="card-block media clearfix p-25">
+                                <div class="pr-20">
+                                    <a href="#" class="avatar avatar-lg">
+                                        <img class="img-fluid" src="{{ asset("template/global/portraits/"~post.photo )}}">
+                                    </a>
+                                </div>
+                                <div class="media-body text-middle">
+                                    <h4 class="mt-0 mb-5">
+                                        {{ post.firstname }} {{ post.lastname }}
+                                    </h4>
+                                    <small>Posted {{ time_diff(post.dateinsert) }}</small>
+
+                                </div>
+                            </div>
+                            <div class="card-block px-25  pt-0">
+                                <p class="card-text mb-20" id="ThisPost{{ post.idPo }}">
+                                    {{ post.contenu }}
+                                </p>
+                                <div class="row imgs-gallery mb-20 no-space">
+                                    <div class="col-lg-12">
+                                        {% if post.file  %}
+                                        <a href="{{ asset("template/global/photos/animal-2-960x640.jpg")}}" alt="..." class="gallery-item"
+                                           data-img-id="m_1" title="view_1">
+                                            <img src="{{ asset("template/global/photos/animal-2-960x640.jpg")}}" class="w-full">
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <ul class="wall-attrs clearfix p-0 m-0">
+                                    <li class="attrs-meta float-left">
+                                        <div class="example example-buttons">
+                                            <div class="btn-group" role="group">
+                                        {% set myVal = 0 %}
+                                        {% for postIlike in likers %}
+                                            {% if (post.idPo == postIlike.idpost )  %}
+                                            <button type="button"  class="btn btn-icon btn-pure active waves-effect waves-light waves-round" data-toggle="button "  >
+                                              <span class="text" id="a{{ post.idPo }}">
+                                                <i class="icon md-thumb-up" aria-hidden="true"></i>
+                                              </span>
+                                                    <span class="text-active">
+                                                <i class="icon md-thumb-up text-danger" aria-hidden="true" id="w{{ post.idPo }}"></i>  {{ post.nbLikes }}
+                                              </span>
+                                            </button>
+                                                {% set myVal = 1 %}
+
+                                            {% endif %}
+                                        {% endfor %}
+                                        {%  if myVal == 0 %}
+                                            <button type="button"  class="btn btn-icon btn-pure active waves-effect waves-light waves-round" data-toggle="button "  id="d{{ post.idPo }}">
+                                                  <span class="text-active" id="s{{ post.idPo }}">
+                                                    <i class="icon md-thumb-up" aria-hidden="true"></i> {{ post.nbLikes }}
+                                                  </span>
+                                                <span class="text" id="z{{ post.idPo }}">
+                                                    <i class="icon md-thumb-up text-danger" aria-hidden="true" ></i>
+                                                  </span>
+                                            </button>
+                                        {% endif %}
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-info btn-sm waves-effect waves-light waves-round" data-target="#exampleFormModal" data-toggle="modal" id="btnComment{{ post.idPo }}" ><i class="icon md-comment" aria-hidden="true"  ></i> Comment</button>
+                                            </div>
+                                            {% if post.postIdUser == app.user.id %}
+                                            <div class="btn-group" role="group">
+                                        <div class="dropdown comment-operation">
+                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle waves-effect waves-light waves-round" data-toggle="dropdown"
+                                                    aria-expanded="false" >
+                                                <i class="icon md-edit" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                                <a class="dropdown-item" href="javascript:void(0)" role="menuitem" data-target="#editPostModal" data-toggle="modal" id="postEdit{{ post.idPo }}" >Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)" role="menuitem" id="postDelete{{ post.idPo }}">Delete</a>
+                                            </div>
+                                        </div>
+                                            </div>
+                                            {% endif %}
+                                        <input value="{{ post.idPo }}" id="{{ post.idPo }}" type="hidden" >
+                                        </div>
+                                    </li>
+                                    <li class="float-right">
+                                        <a href="#" class="avatar avatar-sm" data-paticipator-id="p_1">
+                                            <img src="{{ asset("template/global/portraits/3.jpg")}}">
+                                        </a>
+                                        <a href="#" class="avatar avatar-sm" data-paticipator-id="p_2">
+                                            <img src="{{ asset("template/global/portraits/1.jpg")}}">
+                                        </a>
+                                        <a href="#" class="avatar avatar-sm" data-paticipator-id="p_3">
+                                            <img src="{{ asset("template/global/portraits/2.jpg")}}">
+                                        </a>
+                                        <a href="#" class="avatar avatar-sm" data-paticipator-id="p_4">
+                                            <img src="{{ asset("template/global/portraits/4.jpg")}}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer p-20" id="place{{ post.idPo }}">
+                                {% for comment in comments %}
+                                    {%  if comment.idpost.idPo == post.idPo %}
+                                        <div class="wall-comment" id="wall{{ comment.idCo }}">
+                                            <a href="#" class="avatar avatar-md float-left">
+                                                <img class="img-fluid" src="{{ asset("template/global/portraits/"~comment.iduser.photo )}}">
+                                            </a>
+                                            <div class="ml-60">
+                                                <a href="#">{{ comment.iduser.firstname }} {{ comment.iduser.lastname }}</a>
+                                                {% if  comment.modified  %}
+                                                    <small class="ml-10">modified {{ time_diff(comment.datemodification) }}</small>
+                                                {% else %}
+                                                <small class="ml-10">{{ time_diff(comment.datepublished) }}</small>
+                                                {% endif %}
+                                                <p class="mt-5" id="contentCom{{ comment.idCo }}">
+                                                    {{ comment.comment }}
+                                                </p>
+                                            </div>
+
+                                            {%  if comment.iduser.id == app.user.id %}
+                                            <div class="dropdown comment-operation">
+                                                <button type="button" class="btn btn-icon btn-primary btn-round waves-effect waves-light waves-round" data-toggle="dropdown"
+                                                        aria-expanded="false" >
+                                                    <i class="icon md-edit" aria-hidden="true"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                                    <a class="dropdown-item" href="javascript:void(0)" role="menuitem" data-target="#editModal" data-toggle="modal" id="EditMyComment{{ comment.idCo }}" >Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0)" role="menuitem" id="DeleteMyComment{{ comment.idCo }}">Delete</a>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+
+                <div class="col-lg-4">
+                    <div class="card card-block">
+                        <h4 class="card-title">About me</h4>
+                        <p class="card-text">
+                            Ex esse et aliquip proident qui sunt culpa qui. Enim amet ut Lorem sit sit nulla
+                            commodo. Ullamco tempor nulla ullamco magna. Laborum adipisicing
+                            labore non consequat commodo excepteur minim dolore aute.
+                            <a href="#">Read more...</a>
+                        </p>
+                    </div>
+                    <div class="card wall-recent-comments">
+                        <div class="card-header card-header-transparent">
+                            <h4 class="card-title">
+                                People you may know
+                            </h4>
+                            <p class="card-text">
+                                add them to increase your social relation
+                            </p>
+                        </div>
+                        <div class="card-block">
+                            {% for p in peoplz %}
+                                {% if p.iduser.id != app.user.id and p.idfriend.id!=app.user.id %}
+                            <div class="avatar avatar-online avatar-lg m-5">
+                                <a href="{{ path('display', { 'id': p.iduser.id }) }}">
+                                <img src="{{ asset("template/global/portraits/"~p.iduser.photo)}} ">
+                                </a>
+                                <i></i>
+                            </div>
+                                    <div class="avatar avatar-online avatar-lg m-5">
+                                        <a href="{{ path('display', { 'id': p.idfriend.id }) }}">
+                                            <img src="{{ asset("template/global/portraits/"~p.idfriend.photo)}} "></a>
+                                        <i></i>
+                                    </div>
+                            {% endif %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <div class="card p-20">
+                        <h4 class="card-title">
+                            Contact Information
+                        </h4>
+                        <p class="card-text">
+                            Fusce eget dolor id justo luctus commodo vel pharetra nisi. Donec velit libero
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Add Comment Modal -->
+    <div class="modal fade" id="exampleFormModal" aria-hidden="false" aria-labelledby="exampleFormModalLabel"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleFormModalLabel">Set Your Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form action="">
+                        <div class="col-xl-12 form-group">
+                            <textarea class="form-control" rows="5" placeholder="Type your comment" id="content" required></textarea>
+                        </div>
+                        <div class="col-md-12 float-right">
+                            <button class="btn btn-primary" data-dismiss="modal" id="submitComment" type="submit">Add Comment</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Add Comment Modal -->
+    <!--Edit Comment Modal -->
+    <div class="modal fade" id="editModal" aria-hidden="false" aria-labelledby="editModal"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleFormModalLabel">Modify Your Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-xl-12 form-group">
+                            <textarea class="form-control" rows="5" placeholder="Type your comment" id="contentEditCom"></textarea>
+                        </div>
+                        <div class="col-md-12 float-right">
+                            <button class="btn btn-primary" data-dismiss="modal"  type="button" id="saveEdit">Save </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Edit Comment Modal -->
+    <!--Edit Post Modal -->
+    <div class="modal fade" id="editPostModal" aria-hidden="false" aria-labelledby="editPostModal"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleFormModalLabel">Modify Your Post</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xl-12 form-group">
+                            <textarea class="form-control" rows="5" placeholder="" id="EditPost"></textarea>
+                        </div>
+                        <div class="col-md-12 float-right">
+                            <button class="btn btn-primary" data-dismiss="modal"  type="button" id="saveEditPost">Save </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Edit Post Modal -->
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var clicked = 0 ;
+            $(".btn-icon").click(function () {
+                var id = $(this).attr('id');
+                clicked++;
+            if(id.indexOf('d') != -1) {
+                if (clicked % 2 === 0) {
+                    id = id.replace("d","");
+                    var url4 = '{{ path("post_dislike", {'id': 'id'}) }}';
+                    $.ajax({
+                        url: url4.replace("id", id),
+                        success: function (result) {
+                            var test = "z";
+                            var c = test + id;
+                            $('#' + c).text(result);
+                        } })}
+                else {
+                    var url3 = '{{ path("post_like", {'id': 'id'}) }}';
+                    id = id.replace("d","");
+                    alert("like");
+                    $.ajax({
+                        url: url3.replace("id", id),
+                        success: function (result) {
+                            alert(result);
+
+                            var test3 = "z";
+                            var test = "s";
+                            var test2 = "a";
+                            var test4 = "w";
+                            var c = test + id;
+                            var d = test2 + id ;
+                            var e = test3 + id ;
+                            var h = test4 + id ;
+
+                            $('#' + d).text(result);
+                            $('#' + h).text(result);
+                            $('#' + e).text(result);
+                            $('#' + c).text(result);
+                        }})}}
+                 else {
+                    if (clicked % 2 === 0) {
+                        var url1 = '{{ path("post_like", {'id': 'id'}) }}';
+                        $.ajax({
+                            url: url1.replace("id", id),
+                            success: function (result) {
+                                var test = "a";
+                                var c = test + id;
+                                $('#' + c).text(result);
+                            }})
+                    }
+                    else {
+                        var url2 = '{{ path("post_dislike", {'id': 'id'}) }}';
+                        $.ajax({
+                            url: url2.replace("id", id),
+                            success: function (result) {
+                                var test = "a";
+                                var c = test + id;
+                                $('#' + c).text(result);
+                            }})
+                    }}})
+
+            $(".btn-info").click(function () {
+                var id = $(this).attr('id');
+                if (id.indexOf('btnComment') != -1)
+                {
+                    id = id.replace("btnComment","");
+                    $("#submitComment").on('click', function() {
+                        var content =  $("#content").val();
+                        var url6 = '{{ path("add_comment", {'id': 'id','content':'content'}) }}';
+                        $.ajax({
+                            url: '/2/PiDevBeta/PiDevBeta/web/app_dev.php/accueil/comment/'+id+'/'+content,
+                            success: function (result) {
+
+                                var thisComment = result.toString();
+                                var idComment =thisComment.split(" ", 1);
+                                thisComment= thisComment.replace(idComment,"");
+                                thisComment= thisComment.replace(" ","");
+                                var idPost = thisComment.split(" ",1);
+                                thisComment= thisComment.replace(idPost,"");
+                                var content = thisComment;
+                                var test = "place";
+                                var c = test + id;
+                                $('#' + c).append('  <div class="wall-comment" id="wall'+idComment+'">\
+                                                    <a href="#" class="avatar avatar-md float-left">\
+                                                    <img src="data:image/png;base64,{{ app.user.image}}" >\
+                                                    </a>\
+                                                    <div class="ml-60">\
+                                                    <a href="#">{{ app.user.firstname }} {{ app.user.lastname }}</a>\
+                                                    <small class="ml-10">modified now</small>\
+                                                    <p class="mt-5" id="contentCom'+idComment+'">\
+                                                    '+content+'</p>\
+                                                    </div>\
+                                                    <div class="dropdown comment-operation">\
+                                                    <button type="button" class="btn btn-icon btn-primary btn-round waves-effect waves-light waves-round" data-toggle="dropdown"\
+                                                                            aria-expanded="false" >\
+                                                    <i class="icon md-edit" aria-hidden="true"></i>\
+                                                    </button>\
+                                                    <div class="dropdown-menu dropdown-menu-right" role="menu">\
+                                                    <a class="dropdown-item" href="javascript:void(0)" role="menuitem" data-target="#editModal" data-toggle="modal" id="EditMyComment'+idComment+'" >Edit</a>\
+                                                    <a class="dropdown-item" href="javascript:void(0)" role="menuitem" id="DeleteMyComment'+idComment+'">Delete</a>\
+                                                    </div>\
+                                                    </div\
+                                                    </div>');
+                            } })
+
+                    })
+                }
+
+            })
+
+            $(".dropdown-item").on('click', function() {
+              var id = $(this).attr('id');
+
+                if (id.indexOf('EditMyComment') != -1)
+                {
+                    id = id.replace("EditMyComment","");
+                    var id2 = "contentCom"+id;
+
+                    var con = $('#'+id2).text();
+                    $('#contentEditCom').val(con);
+                    var url8 = '{{ path("edit_comment", {'id': 'id' , 'content':'content'}) }}';
+
+                    $('#saveEdit').click(function () {
+                        alert("clicked");
+                        var update = $('#contentEditCom').val();
+                        $.ajax({
+                            url: url8.replace("id", id).replace("content",update),
+                            success: function (result) {
+                                var thisComment = result.toString();
+                                var idComment =thisComment.split(" ", 1);
+                                thisComment= thisComment.replace(idComment,"");
+                                thisComment= thisComment.replace(" ","");
+                                var idPost = thisComment.split(" ",1);
+                                thisComment= thisComment.replace(idPost,"");
+                                var content = thisComment;
+
+                                var test = "place";
+
+                                var old = "wall"  + id;
+                                var c = test + idPost;
+                                $('#'+ old).fadeOut();
+                                $('#' + c).append('  <div class="wall-comment" id="wall'+idComment+'">\
+                                                    <a href="#" class="avatar avatar-md float-left">\
+                                                    <img src="{{ asset("template/global/portraits/"~ app.user.photo )}}">\
+                                                    </a>\
+                                                    <div class="ml-60">\
+                                                    <a href="#">{{ app.user.firstname }} {{ app.user.lastname }}</a>\
+                                                    <small class="ml-10">modified now</small>\
+                                                    <p class="mt-5" id="contentCom'+idComment+'">\
+                                                    '+content+'</p>\
+                                                    </div>\
+                                                    <div class="dropdown comment-operation">\
+                                                    <button type="button" class="btn btn-icon btn-primary btn-round waves-effect waves-light waves-round" data-toggle="dropdown"\
+                                                                            aria-expanded="false" >\
+                                                    <i class="icon md-edit" aria-hidden="true"></i>\
+                                                    </button>\
+                                                    <div class="dropdown-menu dropdown-menu-right" role="menu">\
+                                                    <a class="dropdown-item" href="javascript:void(0)" role="menuitem" data-target="#editModal" data-toggle="modal" id="EditMyComment'+idComment+'" >Edit</a>\
+                                                    <a class="dropdown-item" href="javascript:void(0)" role="menuitem" id="DeleteMyComment'+idComment+'">Delete</a>\
+                                                    </div>\
+                                                    </div\
+                                                    </div>');
+
+                            } })
+                    })
+
+
+                }
+
+              if (id.indexOf('DeleteMyComment') != -1)
+              {
+                  alert("delete");
+                  id = id.replace("DeleteMyComment","");
+                  var url4 = '{{ path("delete_comment", {'id': 'id'}) }}';
+                  $.ajax({
+                      url: url4.replace("id", id),
+                      success: function (result) {
+
+                          var test = "wall";
+                          var c = test + id;
+                          $('#' + c).fadeOut();
+                      } })
+
+              }
+
+              if (id.indexOf('postDelete') != -1)
+                {
+                    alert("delete");
+                    id = id.replace("postDelete","");
+                    var url10 = '{{ path("delete_post", {'id': 'id'}) }}';
+                    $.ajax({
+                        url: url10.replace("id", id),
+                        success: function (result) {
+                            var test = "myPost";
+                            var c = test + id;
+                            $('#' + c).fadeOut();
+                        } })
+                }
+
+              if (id.indexOf('postEdit') != -1)
+                {
+                    id = id.replace("postEdit","");
+                    var id20 = "ThisPost"+id;
+
+                    var con0 = $('#'+id20).text();
+                    $('#EditPost').val(con0);
+                    var url80 = '{{ path("edit_post", {'id': 'id' , 'content':'content'}) }}';
+
+                    $('#saveEditPost').click(function () {
+                        alert("clicked");
+                        var update = $('#EditPost').val();
+                        $.ajax({
+                            url: url80.replace("id", id).replace("content",update),
+                            success: function (result) {
+                                var thisComment = result.toString();
+
+                                var test = "ThisPost";
+
+                                var c = test + id;
+                                $('#' + c).text(update);
+
+                            } })
+                    })
+
+
+                }
+
+
+          })
+
+
+        });
+    </script>
+{% endblock %}

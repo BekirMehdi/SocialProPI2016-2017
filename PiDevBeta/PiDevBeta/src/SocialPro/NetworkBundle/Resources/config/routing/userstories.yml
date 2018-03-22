@@ -1,0 +1,24 @@
+adminUserStories_index:
+    path:     /
+    defaults: { _controller: "myappSocialProBundle:UserStories:index" }
+    methods:  GET
+
+adminUserStories_show:
+    path:     /{id}/show
+    defaults: { _controller: "myappSocialProBundle:UserStories:show" }
+    methods:  GET
+
+adminUserStories_new:
+    path:     /new
+    defaults: { _controller: "myappSocialProBundle:UserStories:new" }
+    methods:  [GET, POST]
+
+adminUserStories_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "myappSocialProBundle:UserStories:edit" }
+    methods:  [GET, POST]
+
+adminUserStories_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "myappSocialProBundle:UserStories:delete" }
+    methods:  DELETE

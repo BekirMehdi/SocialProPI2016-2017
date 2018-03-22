@@ -1,0 +1,38 @@
+tasks_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:Tasks:index" }
+    methods:  GET
+
+tasks_show:
+    path:     /{id}/show
+    defaults: { _controller: "SocialProNetworkBundle:Tasks:show" }
+    methods:  GET
+
+tasks_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:Tasks:new" }
+    methods:  [GET, POST]
+
+tasks_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SocialProNetworkBundle:Tasks:edit" }
+    methods:  [GET, POST]
+
+tasks_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SocialProNetworkBundle:Tasks:delete" }
+    methods:  DELETE
+
+custom_task:
+    path:     /taskboard
+    defaults: { _controller: "SocialProNetworkBundle:Tasks:displayTaskBoard" }
+    methods:  GET
+custom_taskBoard:
+    path:     /taskboardnew
+    defaults: { _controller: "SocialProNetworkBundle:Tasks:taskBoard" }
+    methods:  GET
+tasks_chart:
+    path:     /chart
+    defaults: { _controller: "SocialProNetworkBundle:Tasks:Stat2" }
+    methods:  GET
+

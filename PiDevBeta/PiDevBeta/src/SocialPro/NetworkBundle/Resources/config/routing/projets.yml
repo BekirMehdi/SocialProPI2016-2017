@@ -1,0 +1,62 @@
+rechercheProjets:
+    path:  /rechercheProjets
+    defaults: { _controller:"SocialProNetworkBundle:Projets:rechercheProjets"  }
+
+
+allAcces:
+    path:     /allAcces
+    defaults: { _controller: "SocialProNetworkBundle:Projets:projetsAcces" }
+
+
+detailsAcces:
+    path:     /projet/{idPo}
+    defaults: { _controller: "SocialProNetworkBundle:Projets:accesDetails" }
+    methods:  GET
+    options:
+        expose: true
+
+frontDrowseProjets:
+    path:     /browseProjets
+    defaults: { _controller: "SocialProNetworkBundle:Projets:browseprojects" }
+
+
+frontProjetDetails:
+    path:     /projetDetails/{id}
+    defaults: { _controller: "SocialProNetworkBundle:Projets:projectDetails" }
+    methods:  GET
+
+frontProjets:
+    path:     /listeProjets
+    defaults: { _controller: "SocialProNetworkBundle:Projets:projects" }
+    methods:
+
+progressionProjets:
+    path:     /progressionProjets
+    defaults: { _controller: "SocialProNetworkBundle:Projets:progressionProjects" }
+    methods:  GET
+
+
+adminProjets_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:Projets:index" }
+    methods:  GET
+
+adminProjets_show:
+    path:     /{id}/show
+    defaults: { _controller: "SocialProNetworkBundle:Projets:show" }
+    methods:  GET
+
+adminProjets_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:Projets:new" }
+    methods:  [GET, POST]
+
+adminProjets_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SocialProNetworkBundle:Projets:edit" }
+    methods:  [GET, POST]
+
+adminProjets_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SocialProNetworkBundle:Projets:delete" }
+    methods:  DELETE

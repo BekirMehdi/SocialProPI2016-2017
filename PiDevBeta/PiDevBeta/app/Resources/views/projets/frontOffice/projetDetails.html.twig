@@ -1,0 +1,231 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+
+    <link rel="stylesheet" href="{{ asset("lib/morris.js-0.5.1/morris.css")}}">
+
+    <script src="{{ asset("lib/jquery/jquery.js")}}"></script>
+    <script src="{{ asset("lib/raphael/raphael.min.js")}}"></script>
+    <script src="{{ asset("lib/morris.js-0.5.1/morris.min.js")}}"></script>
+    <div id="tutor"></div>
+
+    <style>
+        #tutor{
+            float: left;
+            width: 500px;
+            height: 300px;
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        Morris.Bar({
+            // ID of the element in which to draw the chart.
+            element: 'tutor',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: [
+                {% for projet in projets %}
+                { 'tuto': '{{ projet.getName() }}', value: {{ projet.getProgression() }} },
+                {% endfor %}
+            ],
+            // The name of the data record attribute that contains x-values.
+            xkey: 'tuto',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['tutor']
+        });
+    </script>
+
+    <div id="tutor1"></div>
+
+    <style>
+        #tutor1{
+            float: left;
+            width: 500px;
+            height: 300px;
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        Morris.Bar({
+            // ID of the element in which to draw the chart.
+            element: 'tutor1',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: [
+                { 'tuto': 'js', value: 20 ,communute: 20 },
+                { 'tuto': 'php', value: 10 ,communute: 80 },
+                { 'tuto': 'sym', value: 5 ,communute: 100 },
+                { 'tuto': 'html', value: 5 ,communute: 10 },
+                { 'tuto': 'css', value: 20 ,communute: 40 }
+            ],
+            // The name of the data record attribute that contains x-values.
+            xkey: 'tuto',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value','communute'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['tutor1','communute']
+        });
+    </script>
+
+    <div id="tutor2"></div>
+
+    <style>
+        #tutor2{
+            float: left;
+            width: 500px;
+            height: 300px;
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        Morris.Area({
+            // ID of the element in which to draw the chart.
+            element: 'tutor2',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: [
+                { 'tuto': '2008', value: 20 ,communute: 20 },
+                { 'tuto': '2012', value: 10 ,communute: 80 },
+                { 'tuto': '2015', value: 5 ,communute: 100 },
+            ],
+            // The name of the data record attribute that contains x-values.
+            xkey: 'tuto',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value','communute'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['tutor2','communute']
+        });
+    </script>
+
+    <div id="tutor3"></div>
+
+    <style>
+        #tutor3{
+            float: left;
+            width: 500px;
+            height: 300px;
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'tutor3',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: [
+                { 'tuto': '2008', value: 20 ,communute: 20 },
+                { 'tuto': '2012', value: 10 ,communute: 80 },
+                { 'tuto': '2015', value: 5 ,communute: 100 },
+            ],
+            // The name of the data record attribute that contains x-values.
+            xkey: 'tuto',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value','communute'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['tuto','communute']
+        });
+    </script>
+
+
+
+    <!-- Load jQuery from Google's CDN if needed -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
+    <script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
+    <script type="text/javascript">
+        {{ chart(chart) }}
+        {{ chart(chart2) }}
+    </script>
+    <style>
+        #linechart{
+            float: left;
+            width: 500px;
+            height: 300px;
+            border: 1px solid #000;
+        }
+    </style>
+    <div id="linechart"></div>
+
+
+    <div id="linechart2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+
+
+    <!-- Libs -->
+
+    <script type='text/javascript' src='../js/utils.js'></script>
+    <script type='text/javascript' src='data.js'></script>
+    <script type='text/javascript' src='main.js'></script>
+
+
+    <div id='pieChart'></div>
+
+    <script>
+        $(document).ready(function() {
+
+            $.displayPieChart(colors, data);
+
+        });
+
+        var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
+
+        $.displayPieChart = function(colors, data) {
+
+            var chart;
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'pieChart',
+                    width: 598,
+                    height: 450,
+                    marginLeft: 25,
+                    marginRight: 25,
+                },
+                colors: colors,
+                title: {
+                    text: "Dépenses SECU janvier par région",
+                    margin: 10
+                },
+                tooltip: {
+                    formatter: function() {
+                        return "Dépense : " + number_format(this.y,0,',',' ') + "€" ;
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function() {
+                                return "" + this.point.name.toLowerCase() + "";
+                            }
+                        }
+                    },
+                    series: {
+                        dataLabels: {
+                            enabled: true,
+                            color: 'black',
+                            fontSize: 3
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    data: data
+                }]
+            });
+
+        }
+    </script>
+
+
+{% endblock %}

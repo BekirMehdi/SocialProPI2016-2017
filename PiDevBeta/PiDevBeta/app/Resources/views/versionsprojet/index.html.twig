@@ -1,0 +1,163 @@
+{% extends 'show1.html.twig' %}
+{% block content %}
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
+           aria-expanded="false" data-animation="scale-up" role="button">
+            <i class="icon md-notifications" aria-hidden="true"></i>
+            <span class="badge badge-pill badge-danger up" id="1" onclick="mettreAzero(this)">{{ nbrvue }}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+            <div class="dropdown-menu-header">
+                <h5>Activités récentes </h5>
+                <span class="badge badge-round badge-danger" id="2" >Nouveau {{ nbrvue }}</span>
+            </div>
+            <div class="list-group">
+                <div data-role="container">
+                    <div data-role="content">
+                        {% for activites in listactivites %}
+                            <a class="list-group-item dropdown-item" href="javascript:void(0)" role="menuitem">
+                                <div class="media">
+                                    <div class="pr-10">
+                                        <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+
+                                        <input id={{ activites.idAc }}  class="ajax"  value="{{ activites.idAc }}" >
+                                        <h5 class="media-heading" onclick="marquervu(this)" >{{ activites.username }} {{ activites.description }}</h5>
+                                        <time class="media-meta" datetime="2017-06-10T13:50:18+08:00">{{ activites.date|date('Y-m-d') }}</time>
+
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown-menu-footer">
+                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                    <i class="icon md-settings" aria-hidden="true"></i>
+                </a>
+                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                    All notifications
+                </a>
+            </div>
+        </div>
+    </li>
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="panel-body">
+        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="dataTables_length" id="DataTables_Table_0_length">
+                        <label>
+                            <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-6"><div id="DataTables_Table_0_filter" class="dataTables_filter">
+                        <label>
+                            <input type="search" class="form-control input-sm" placeholder="Search.." aria-controls="DataTables_Table_0">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-hover dataTable table-striped w-full dtr-inline" data-plugin="dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                        <h1>La  liste des versions </h1>
+                        <thead>
+                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 195px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Identidiant de la version </th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 265px;" aria-label="Position: activate to sort column ascending"></th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 215px;" aria-label="Office: activate to sort column ascending">identifiant du projet</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 52px;" aria-label="Age: activate to sort column ascending">Nom du sprint</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 117px;" aria-label="Date: activate to sort column ascending">Nom de la version</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 92px;" aria-label="Salary: activate to sort column ascending">Date de création</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 117px;" aria-label="Date: activate to sort column ascending">Fichier</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 117px;" aria-label="Date: activate to sort column ascending">Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+    {% for versionsProjet in versionsProjets %}
+                        <tr role="row" class="odd">
+                            <td class="sorting_1" tabindex="0"><a href="{{ path('versionsprojet_show', { 'idVp': versionsProjet.idVp }) }}">{{ versionsProjet.idVp }}</a></td>
+
+                            <td>{{ versionsProjet.idVp }}</td>
+                            <td>{{ versionsProjet.idProjet }}</td>
+                            <td>{{ versionsProjet.numSprint }}</td>
+                            <td>{{ versionsProjet.numVersion }}</td>
+                            <td>{% if versionsProjet.dateCreation %}{{ versionsProjet.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{{ versionsProjet.fichier }}</td>
+                            <td>{{ versionsProjet.description }}</td>
+                            <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('versionsprojet_show', { 'idVp': versionsProjet.idVp }) }}">Afficher</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('versionsprojet_edit', { 'idVp': versionsProjet.idVp }) }}">Modifier</a>
+                                </li>
+                            </ul>
+                            </td>
+                        </tr>
+    {% endfor %}
+                       </tbody>
+                    </table>
+                </div>
+
+
+
+              </div>
+
+        </div>
+
+
+    <ul>
+        <li>
+            <a href="{{ path('versionsprojet_new') }}"> Créer une nouvelle version </a>
+        </li>
+
+    </ul>
+
+</div>
+
+    <div class="pagination " >
+        {{ knp_pagination_render(versionsProjets) }}
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        function mettreAzero(element) {
+            document.getElementById("1").innerHTML="0";
+            document.getElementById("2").innerHTML="Nouveau 0";
+        }
+
+        function marquervu(element) {
+
+            var idac=document.getElementById("activites.idAc");
+            var xhr;
+            xhr = new XMLHttpRequest();
+
+            var url = '{{ path('versionsprojet_AjaxModifierVue', {'idactalite':'idactalite'}) }}';
+            url = url.replace("idactalite", idac);
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
+    </script>
+{% endblock %}
+
+
+
+

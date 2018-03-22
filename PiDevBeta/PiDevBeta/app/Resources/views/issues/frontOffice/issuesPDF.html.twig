@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Probleme</title>
+    <link href="{{ asset('bundles/facture.css') }}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>
+    <img class="img-fluid" src="{{ asset("global/portraits/1.jpg")}}" alt="...">
+    {{ issu.idprojet.name }}/Probleme-{{ issu.idIss }}
+</h1>
+<p>  <h5> {{ issu.summary }}</h5></p>
+<table id="enTete">
+
+    <thead>
+    <tr>
+        <th><h4>Details</h4></th>
+        <th width="80">Type</th>
+        <th width="100">Priority</th>
+        <th width="120">Resolution</th>
+        <th width="80">Type</th>
+        <th width="100">Priority</th>
+        <th width="120">Resolution</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="color">{{ issu.type }}</td>
+        <td class="color">{{ issu.priority }}</td>
+        <td class="color">{{ issu.resolution }}</td>
+        <td class="color">{{ issu.type }}</td>
+        <td class="color">{{ issu.priority }}</td>
+        <td class="color">{{ issu.resolution }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<p>
+<div id="footer">
+    <span class="color strong">{{ issu.dateCreation|date('d-m-Y') }}</span>
+</div>
+</p>
+</body>
+</html>

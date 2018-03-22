@@ -1,0 +1,65 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+    <div class="page-header">
+        <h1 class="page-title">creation de issue</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('adminIssues_index') }}">Acueil</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Issues</a></li>
+            <li class="breadcrumb-item active">Ajout</li>
+        </ol>
+        <div class="page-header-actions">
+            <a class="btn btn-sm btn-primary btn-round waves-effect" href="{{ path('adminIssues_index') }}">
+                <i class="icon md-link" aria-hidden="true"></i>
+                <span class="hidden-sm-down">Retour a la liste</span>
+            </a>
+        </div>
+    </div>
+    <div class=" page-content container-fluid col-md-12">
+        <div class="panel">
+            {{ form_start(form) }}
+            <div class="panel-body container-fluid">
+                <div class="form-group form-material " data-plugin="formMaterial">
+                    <label class="form-control-label">Projet</label>
+                    {{ form_widget(form.idprojet) }}
+                </div>
+                <div class="form-group form-material " data-plugin="formMaterial">
+                    <label class="form-control-label">Type</label>
+                    {{ form_widget(form.type) }}
+                </div>
+                <div class="form-group form-material " data-plugin="formMaterial">
+                    <label class="form-control-label">priority</label>
+                    {{ form_widget(form.priority) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <label class="form-control-label">description</label>
+                    {{ form_widget(form.description) }}
+                </div>
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <label class="form-control-label">resolution</label>
+                    {{ form_widget(form.resolution) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <label class="form-control-label">summary</label>
+                    {{ form_widget(form.summary) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <label class="form-control-label">security Level</label>
+                    {{ form_widget(form.securityLevel) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <label class="form-control-label">symptom Severity</label>
+                    {{ form_widget(form.symptomSeverity) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <label class="form-control-label">assigneer</label>
+                    {{ form_widget(form.assigneer) }}
+                </div>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <button type="submit" class="btn btn-primary waves-effect" id="validateButton1" value="Create">ajouter</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

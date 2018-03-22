@@ -1,0 +1,122 @@
+{% extends 'show1.html.twig' %}
+{% block content %}
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
+           aria-expanded="false" data-animation="scale-up" role="button">
+            <i class="icon md-notifications" aria-hidden="true"></i>
+            <span class="badge badge-pill badge-danger up" id="1" onclick="mettreAzero(this)">{{ nbrvue }}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+            <div class="dropdown-menu-header">
+                <h5>Activités récentes </h5>
+                <span class="badge badge-round badge-danger" id="2" >Nouveau {{ nbrvue }}</span>
+            </div>
+            <div class="list-group">
+                <div data-role="container">
+                    <div data-role="content">
+                        {% for activites in listactivites %}
+                        <a class="list-group-item dropdown-item" href="javascript:void(0)" role="menuitem">
+                            <div class="media">
+                                <div class="pr-10">
+                                    <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
+                                </div>
+                                <div class="media-body">
+
+                                    <input id="idact"  class="ajax" type="hidden"  value="{{ activites.idAc }}" >
+                                    <h5 class="media-heading" onclick="marquervu(this)" >{{ activites.username }} {{ activites.description }}</h5>
+                                    <time class="media-meta" datetime="2017-06-10T13:50:18+08:00">{{ activites.date|date('Y-m-d') }}</time>
+
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown-menu-footer">
+                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                    <i class="icon md-settings" aria-hidden="true"></i>
+                </a>
+                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                    All notifications
+                </a>
+            </div>
+        </div>
+    </li>
+{% endblock %}
+{% block body %}
+
+    <h1>Versionsprojet</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nom du projet</th>
+                {% for i in x  %}
+                    <td>{{ i.name }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Numsprint</th>
+                <td>{{ versionsProjet.numSprint }}</td>
+            </tr>
+            <tr>
+                <th>Numversion</th>
+                <td>{{ versionsProjet.numVersion }}</td>
+            </tr>
+            <tr>
+                <th>Datecreation</th>
+                <td>{% if versionsProjet.dateCreation %}{{ versionsProjet.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fichier</th>
+                <td>{{ versionsProjet.fichier }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ versionsProjet.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('versionsprojet_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('versionsprojet_edit', { 'idVp': versionsProjet.idVp }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    <script type="text/javascript">
+        function mettreAzero(element) {
+            document.getElementById("1").innerHTML="0";
+            document.getElementById("2").innerHTML="Nouveau 0";
+        }
+
+        function marquervu(element) {
+
+            var idac=document.getElementById("idact");
+
+            var xhr;
+            xhr = new XMLHttpRequest();
+
+            var url = '{{ path('versionsprojet_AjaxModifierVue', {'idactalite':'idactalite'}) }}';
+            url = url.replace("idactalite", idac);
+            xhr.open("GET", url, true);
+            xhr.send();
+
+        }
+
+    </script>
+
+{% endblock %}
+
+
+
+
+

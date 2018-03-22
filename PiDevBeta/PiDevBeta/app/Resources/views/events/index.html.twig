@@ -1,0 +1,101 @@
+
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+
+
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap-extend.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("assets/css/site.min.css")}}">
+
+    <link rel="stylesheet" href="{{ asset("assets/examples/css/tables/basic.css")}}">
+    <div class="panel">
+
+
+        <div class="col-lg-6">
+            <!-- Example Bordered Table -->
+            <div class="example-wrap">
+
+
+                <div class="example table-responsive">
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Idevent</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Lieu</th>
+                            <th>Date</th>
+                            <th>Heure</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for event in events %}
+                            <tr style="width: 50%">
+                                <td><a href="{{ path('adminEvents_show', { 'id': event.getIdEvent }) }}">{{ event.getIdEvent() }}</a></td>
+                                <td>{{ event.getNom() }}</td>
+                                <td>{{ event.getDescription() }}</td>
+                                <td>{{ event.getLieu() }}</td>
+                                <td>{% if event.getDate() %}{{ event.getDate()|date('Y-m-d') }}{% endif %}</td>
+                                <td>{{ event.getHeure() }}</td>
+
+                                <td class="text-nowrap">
+                                    <button onclick="location.href='{{ path('adminEvents_show', { 'id': event.getIdEvent() }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                            data-original-title="Show">
+                                        <i class="icon md-plus" aria-hidden="true"></i>
+                                    </button>
+
+                                    <button onclick="location.href='{{ path('adminEvents_edit', { 'id': event.getIdEvent() }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                            data-original-title="Edit">
+                                        <i class="icon md-wrench" aria-hidden="true"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class=" " >
+                        {{ knp_pagination_render(events) }}
+                    </div>
+
+                </div>
+                    <button onclick="location.href='{{ path('adminEvents_new') }}' " type="submit" class="btn btn-primary" value="New">Create a new event</button>
+                <button onclick="location.href='{{ path('adminEvents_cal') }}' " type="submit" class="btn btn-primary" value="New">Calendar events</button>
+
+
+            </div>
+            <!-- End Example Bordered Table -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

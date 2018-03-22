@@ -1,0 +1,40 @@
+issuesPDF:
+    path:     /issuesPDF/{id}
+    defaults: { _controller: "SocialProNetworkBundle:IssuesFront:issuesPDF" }
+    methods:  GET
+
+frontIssues:
+    path:     /listeIssues
+    defaults: { _controller: "SocialProNetworkBundle:IssuesFront:issuess" }
+
+detailsIssues:
+    path:     /issues/{idIss}
+    defaults: { _controller: "SocialProNetworkBundle:IssuesFront:issueDetails" }
+    methods:  GET
+    options:
+        expose: true
+
+adminIssues_index:
+    path:     /
+    defaults: { _controller: "SocialProNetworkBundle:Issues:index" }
+    methods:  GET
+
+adminIssues_show:
+    path:     /{id}/show
+    defaults: { _controller: "SocialProNetworkBundle:Issues:show" }
+    methods:  GET
+
+adminIssues_new:
+    path:     /new
+    defaults: { _controller: "SocialProNetworkBundle:Issues:new" }
+    methods:  [GET, POST]
+
+adminIssues_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SocialProNetworkBundle:Issues:edit" }
+    methods:  [GET, POST]
+
+adminIssues_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SocialProNetworkBundle:Issues:delete" }
+    methods:  DELETE

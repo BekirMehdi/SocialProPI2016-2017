@@ -1,0 +1,141 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+    <div class="app-work">
+        <div class="page-header">
+            <h1 class="page-title">liste des projets</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Acueil</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">projets</a></li>
+                <li class="breadcrumb-item active">details</li>
+            </ol>
+            <div class="page-header-actions">
+                <a class="btn btn-sm btn-primary btn-round" href="{{ path('progressionProjets') }}"
+                   target="_blank">
+                    <i class="icon md-link" aria-hidden="true"></i>
+                    <span class="hidden-sm-down">statistique</span>
+                </a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="panel">
+                <div class="panel-heading">
+                    <form class="panel-search-form"  method="post" role="search">
+                        <div class="input-search input-search-dark">
+                            <i class="input-search-icon md-search" aria-hidden="true"></i>
+                            <input type="text" class="form-control" name="search" placeholder="recherche de projet...">
+                            <button type="submit" class="input-search-close icon md-refresh" aria-label="search"></button>
+                        </div>
+                    </form>
+                    <ul class="panel-info">
+                        <li>
+                            <div class="num blue-600">{{ nbD }}</div>
+                            <p>Recrutement</p>
+                        </li>
+                        <li>
+                            <div class="num orange-600">{{ nbE }}</div>
+                            <p>En cours</p>
+                        </li>
+                        <li>
+                            <div class="num green-600">{{ nbF }}</div>
+                            <p>Terminé</p>
+                        </li>
+                    </ul>
+                </div>
+                {% if projets|length != 0 %}
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Statut</th>
+                                <th>Nom</th>
+                                <th>Sujet</th>
+                                <th>Le progrès</th>
+                                <th>Membres</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for projet in projets %}
+                                <tr>
+                                    {% if projet.getProgression() == 0 %}
+                                        <td class="work-status">
+                                            <span class="badge badge-warning">Recrutement</span>
+                                        </td>
+                                    {% elseif projet.getProgression() == 100%}
+                                        <td class="work-status">
+                                            <span class="badge badge-success">Terminé</span>
+                                        </td>
+                                    {% else %}
+                                        <td class="work-status">
+                                            <span class="badge badge-primary">En cours</span>
+                                        </td>
+                                    {% endif %}
+                                    <td >
+
+                                        {{ projet.getName() }}
+
+                                    </td>
+                                    <td class="subject">
+                                        <div class="table-content">
+                                            <p class="blue-grey-500">{{ projet.getDescription() }}</p>
+                                            <span class="blue-grey-400">{% if projet.getDatecreation() %}{{ projet.getDatecreation()|date('Y-m-d H:i:s') }}{% endif %}</span>
+                                            <span class="badge badge-sm badge-primary">Recruiting</span>
+                                        </div>
+                                    </td>
+                                    <td class="work-progress">
+                                            {% if projet.getProgression() == 0 %}
+                                                <div class="progress progress-xs table-content">
+                                                    <div class="progress-bar progress-bar-success progress-bar-indicating" style="width: 0" role="progressbar">
+                                                        <span class="sr-only">0%</span>
+                                                    </div>
+                                                </div>
+                                                <span>0%</span>
+                                            {% elseif projet.getProgression() == 100%}
+                                                <div class="progress progress-xs table-content">
+                                                    <div class="progress-bar progress-bar-success progress-bar-indicating" style="width: 100%" role="progressbar">
+                                                        <span class="sr-only">100%</span>
+                                                    </div>
+                                                </div>
+                                                <span>100%</span>
+                                            {% else %}
+                                                <div class="progress progress-xs table-content">
+                                                    <div class="progress-bar progress-bar-primary progress-bar-indicating" style="width: {{ projet.getProgression() }}%"
+                                                         role="progressbar">
+                                                        <span class="sr-only">{{ projet.getDescription() }}%</span>
+                                                    </div>
+                                                </div>
+                                                <span>{{ projet.getProgression() }}%</span>
+                                            {% endif %}
+
+
+                                    </td>
+                                    <td class="members">
+                                        {% for user in users %}
+                                            {% if projet.getIdteam() == user.getIdteam() %}
+                                                <div class="avatar ">
+                                                    <img src="{{ asset(user.getImg().AssetPath) }}" alt="{{ user.username }}">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="panel-body">
+                        <h4>Aucun projets</h4>
+                    </div>
+                {% endif %}
+                <div class="panel-footer">
+                    <nav>
+                        <ul class="pagination pagination-gap">
+                            {{ knp_pagination_render(projets) }}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

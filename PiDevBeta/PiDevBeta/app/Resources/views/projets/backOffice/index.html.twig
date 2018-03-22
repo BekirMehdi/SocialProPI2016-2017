@@ -1,0 +1,75 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+  {% block body %}
+      <div class="panel">
+          <header class="panel-heading">
+              <h3 class="panel-title">Liste de projets</h3>
+          </header>
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="mb-15">
+                          <a href="{{ path('adminProjets_new') }}">
+                              <button id="addToTable" class="btn btn-primary" type="button">
+                                  <i class="icon md-plus" aria-hidden="true"></i> Create a new projet
+                              </button>
+                          </a>
+                      </div>
+                  </div>
+
+              </div>
+              <table class="table table-bordered table-hover table-striped" cellspacing="0" id="exampleAddRow">
+                  <thead>
+                  <tr>
+                      <th>Nom</th>
+                      <th>Date creation</th>
+                      <th>Date limite</th>
+                      <th>Date depart</th>
+                      <th>Progression</th>
+                      <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for projet in projets %}
+                      <tr class="gradeA">
+                          <td>{{ projet.getName() }}</td>
+                          <td>
+                              <span>{% if projet.getDatecreation() %}{{ projet.getDatecreation()|date('Y-m-d H:i:s') }}{% endif %}</span>
+                              <i class="icon md-time ml-10" aria-hidden="true"></i>
+                          </td>
+                          <td>
+                              <span>{% if projet.getDatelimite() %}{{ projet.getDatelimite()|date('Y-m-d H:i:s') }}{% endif %}</span>
+                              <i class="icon md-time ml-10" aria-hidden="true"></i>
+                          </td>
+                          <td>
+                              <span>{% if projet.getDatestart() %}{{ projet.getDatestart()|date('Y-m-d H:i:s') }}{% endif %}</span>
+                              <i class="icon md-time ml-10" aria-hidden="true"></i>
+                          </td>
+                          <td class="w-200">
+                              <div class="progress progress-xs mb-0">
+                                  <div class="progress-bar progress-bar-primary" style="width: {{ projet.getProgression() }}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" role="progressbar">
+                                  </div>
+                              </div>
+                              <span class="float-right progress-percent">{{ projet.getProgression() }}%</span>
+                          </td>
+                          <td class="actions">
+                              <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-editing save-row"
+                                 data-toggle="tooltip" data-original-title="Save" hidden><i class="icon md-wrench" aria-hidden="true"></i></a>
+                              <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-editing cancel-row"
+                                 data-toggle="tooltip" data-original-title="Delete" hidden><i class="icon md-close" aria-hidden="true"></i></a>
+                              <a href="{{ path('adminProjets_edit', { 'id': projet.idPo }) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
+                                 data-toggle="tooltip" data-original-title="Edit"><i class="icon md-edit" aria-hidden="true"></i></a>
+                              <a href="{{ path('adminProjets_show', { 'id': projet.idPo }) }}" class="btn btn-sm btn-icon btn-pure btn-default on-editing save-row"
+                                 data-toggle="tooltip" data-original-title="save"><i class="icon md-wrench" aria-hidden="true"></i></a>
+                          </td>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+              <ul class="pagination pagination-no-border">
+                  {{ knp_pagination_render(projets) }}
+              </ul>
+          </div>
+      </div>
+
+  {% endblock %}

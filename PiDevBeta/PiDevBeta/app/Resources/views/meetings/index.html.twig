@@ -1,0 +1,84 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+
+
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("global/css/bootstrap-extend.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("assets/css/site.min.css")}}">
+
+    <link rel="stylesheet" href="{{ asset("assets/examples/css/tables/basic.css")}}">
+
+    <script src="{{ asset('bundles/MainBundle/js/bootstrap-table.js') }}"></script>
+    <link href="{{ asset('bundles/MainBundle/css/bootstrap-table.css') }}" rel="stylesheet">
+
+
+
+    <div class="panel">
+
+
+    <div class="col-lg-6">
+        <!-- Example Bordered Table -->
+        <div class="example-wrap">
+
+
+            <div class="example table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Idme</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Duree</th>
+                        <th>Description</th>
+                        <th>Lieu</th>
+                        <th>Actions</th>
+
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for meeting in meetings %}
+                        <tr style="width: 50%">
+                            <td><a href="{{ path('adminMeetings_show', { 'id': meeting.idMe }) }}">{{ meeting.idMe }}</a></td>
+                            <td>{{ meeting.type }}</td>
+                            <td>{% if meeting.date %}{{ meeting.date|date('Y-m-d') }}{% endif %}</td>
+                            <td>{{ meeting.heure }}</td>
+                            <td>{% if meeting.type=='Daily Scrum' %}{{ meeting.duree }} minutes{% endif %}
+                                {% if meeting.type!='Daily Scrum' %}{{ meeting.duree }} heures{% endif %}</td>
+                            <td>{{ meeting.description }}</td>
+                            <td>{{ meeting.lieu }}</td>
+
+                            <td class="text-nowrap">
+                                <button onclick="location.href='{{ path('adminMeetings_show', { 'id': meeting.idMe }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                        data-original-title="Show">
+                                    <i class="icon md-plus" aria-hidden="true"></i>
+                                </button>
+
+                                <button onclick="location.href='{{ path('adminMeetings_edit', { 'id': meeting.idMe }) }}' " type="button" class="btn btn-sm btn-icon btn-flat btn-default" data-toggle="tooltip"
+                                        data-original-title="Edit">
+                                    <i class="icon md-wrench" aria-hidden="true"></i>
+                                </button>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <button onclick="location.href='{{ path('adminMeetings_new') }}' " type="submit" class="btn btn-primary" value="New">Create a new meeting</button>
+                <button onclick="location.href='{{ path('adminMeetings_stat') }}' " type="submit" class="btn btn-primary" value="New">Show meetings statistics</button>
+
+            </div>
+        </div>
+        <!-- End Example Bordered Table -->
+    </div>
+</div>
+
+
+{% endblock %}

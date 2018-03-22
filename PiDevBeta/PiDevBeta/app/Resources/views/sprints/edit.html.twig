@@ -1,0 +1,275 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+
+    <!-- Page -->
+    <div class="page">
+        <div class="page-header">
+            <h1 class="page-title">Edit Sprint</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Forms</a></li>
+                <li class="breadcrumb-item active">Layouts</li>
+            </ol>
+            <div class="page-header-actions">
+                <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="tooltip"
+                        data-original-title="Edit">
+                    <i class="icon md-edit" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="tooltip"
+                        data-original-title="Refresh">
+                    <i class="icon md-refresh-alt" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="tooltip"
+                        data-original-title="Setting">
+                    <i class="icon md-settings" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="panel">
+                <div class="panel-body container-fluid">
+                    <div class="row row-lg">
+                        <div class="col-md-6">
+                            <!-- Example Basic Form -->
+                            <div class="example-wrap">
+                                <h4 class="example-title">Edit form</h4>
+                                <div class="example">
+
+                                    {{ form_start(edit_form, {'method': 'post'}) }}
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <!-- Example Select Sizing -->
+                                            <div class="example-wrap">
+                                                <h4 class="example-title">Name Sprint</h4>
+
+                                                <div class="example">
+
+                                                    {{ form_widget(edit_form.name,{'attr': {'name':'name', 'type':'text','class': 'form-control', 'id':'nameSprint'}}) }}
+
+
+                                                </div>
+
+                                            </div>
+                                            <!-- End Example Select Sizing -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-xl-4">
+                                        <!-- Example Inline -->
+                                        <div class="example-wrap">
+                                            <h4 class="example-title">Date Start Sprint</h4>
+
+                                            <div class="example">
+
+                                                {{ form_widget(edit_form.datestart,{'attr': {'name':'datestart', 'type':'hidden','class': 'form-control', 'id':'inputHiddenInline'}}) }}
+
+
+
+                                                <input type="hidden" id="inputHiddenInline"  />
+                                            </div>
+                                        </div>
+                                        <!-- End Example Inline -->
+                                    </div>
+
+                                    <div class="col-md-6 col-xl-4">
+                                        <!-- Example Inline -->
+                                        <div class="example-wrap">
+                                            <h4 class="example-title">Deadline Sprint</h4>
+
+                                            <div class="example">
+
+                                                {{ form_widget(edit_form.deadline,{'attr': {'name':'deadline', 'type':'hidden','class': 'form-control', 'id':'inputHiddenInline'}}) }}
+
+
+
+                                                <input type="hidden" id="inputHiddenInline"  />
+                                            </div>
+                                        </div>
+                                        <!-- End Example Inline -->
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <!-- Example Select Sizing -->
+                                            <div class="example-wrap">
+                                                <h4 class="example-title">Number Sprint</h4>
+
+                                                <div class="example">
+
+                                                    {{ form_widget(edit_form.number,{'attr': {'name':'number', 'type':'number','class': 'form-control', 'id':'numberSprint'}}) }}
+
+
+                                                </div>
+
+                                            </div>
+                                            <!-- End Example Select Sizing -->
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group form-material">
+                                        <label class="form-control-label" for="inputBasicEmail">Description Sprint</label>
+
+
+                                        {{ form_widget(edit_form.description,{'attr': {'name':'description', 'type':'text','class': 'form-control', 'id':'descriptionSprint', 'placeholder':'Saisir la description'}}) }}
+                                    </div>
+
+
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <!-- Example Select Sizing -->
+                                            <div class="example-wrap">
+                                                <h4 class="example-title">ID Projet</h4>
+
+                                                <div class="example">
+
+                                                    {{ form_widget(edit_form.idprojet,{'attr': {'name':'idprojet', 'type':'text','class': 'form-control', 'id':'idprojet'}}) }}
+
+
+                                                </div>
+
+                                            </div>
+                                            <!-- End Example Select Sizing -->
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+                                    <div class="form-group form-material">
+                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                    </div>
+                                    {{ form_end(edit_form) }}
+                                    <div class="form-group form-material">
+
+                                        {{ form_start(delete_form) }}
+                                        <button type="submit" class="btn btn-primary" value="Delete">Delete</button>
+
+                                        {{ form_end(delete_form) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Example Basic Form -->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <!-- End Page -->
+
+
+    <script src="{{ asset("global/vendor/babel-external-helpers/babel-external-helpers.js")}}"></script>
+    <script src="{{ asset("global/vendor/jquery/jquery.js")}}"></script>
+    <script src="{{ asset("global/vendor/tether/tether.js")}}"></script>
+    <script src="{{ asset("global/vendor/bootstrap/bootstrap.js")}}"></script>
+    <script src="{{ asset("global/vendor/animsition/animsition.js")}}"></script>
+    <script src="{{ asset("global/vendor/mousewheel/jquery.mousewheel.js")}}"></script>
+    <script src="{{ asset("global/vendor/asscrollbar/jquery-asScrollbar.js")}}"></script>
+    <script src="{{ asset("global/vendor/asscrollable/jquery-asScrollable.js")}}"></script>
+    <script src="{{ asset("global/vendor/ashoverscroll/jquery-asHoverScroll.js")}}"></script>
+    <script src="{{ asset("global/vendor/waves/waves.js")}}"></script>
+    <!-- Plugins -->
+    <script src="{{ asset("global/vendor/switchery/switchery.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/intro-js/intro.js")}}"></script>
+    <script src="{{ asset("global/vendor/screenfull/screenfull.js")}}"></script>
+    <script src="{{ asset("global/vendor/slidepanel/jquery-slidePanel.js")}}"></script>
+    <script src="{{ asset("global/vendor/select2/select2.full.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/bootstrap-tokenfield/bootstrap-tokenfield.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/bootstrap-select/bootstrap-select.js")}}"></script>
+    <script src="{{ asset("global/vendor/icheck/icheck.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/switchery/switchery.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/asrange/jquery-asRange.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/ionrangeslider/ion.rangeSlider.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/asspinner/jquery-asSpinner.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/clockpicker/bootstrap-clockpicker.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/ascolor/jquery-asColor.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/asgradient/jquery-asGradient.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/ascolorpicker/jquery-asColorPicker.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/bootstrap-maxlength/bootstrap-maxlength.js")}}"></script>
+    <script src="{{ asset("global/vendor/jquery-knob/jquery.knob.js")}}"></script>
+    <script src="{{ asset("global/vendor/bootstrap-touchspin/bootstrap-touchspin.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/jquery-labelauty/jquery-labelauty.js")}}"></script>
+    <script src="{{ asset("global/vendor/bootstrap-datepicker/bootstrap-datepicker.js")}}"></script>
+    <script src="{{ asset("global/vendor/jt-timepicker/jquery.timepicker.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/datepair/datepair.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/datepair/jquery.datepair.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/jquery-strength/password_strength.js")}}"></script>
+    <script src="{{ asset("global/vendor/jquery-strength/jquery-strength.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/multi-select/jquery.multi-select.js")}}"></script>
+    <script src="{{ asset("global/vendor/typeahead-js/bloodhound.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/typeahead-js/typeahead.jquery.min.js")}}"></script>
+    <script src="{{ asset("global/vendor/jquery-placeholder/jquery.placeholder.js")}}"></script>
+    <!-- Scripts -->
+    <script src="{{ asset("global/js/State.js")}}"></script>
+    <script src="{{ asset("global/js/Component.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin.js")}}"></script>
+    <script src="{{ asset("global/js/Base.js")}}"></script>
+    <script src="{{ asset("global/js/Config.js")}}"></script>
+    <script src="{{ asset("assets/js/Section/Menubar.js")}}"></script>
+    <script src="{{ asset("assets/js/Section/Sidebar.js")}}"></script>
+    <script src="{{ asset("assets/js/Section/PageAside.js")}}"></script>
+    <script src="{{ asset("assets/js/Plugin/menu.js")}}"></script>
+    <!-- Config -->
+    <script src="{{ asset("global/js/config/colors.js")}}"></script>
+    <script src="{{ asset("assets/js/config/tour.js")}}"></script>
+    <script>
+        Config.set('assets', '../../assets');
+    </script>
+    <!-- Page -->
+    <script src="{{ asset("assets/js/Site.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/asscrollable.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/slidepanel.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/switchery.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/select2.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/bootstrap-tokenfield.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/bootstrap-tagsinput.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/bootstrap-select.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/icheck.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/switchery.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/asrange.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/ionrangeslider.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/asspinner.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/clockpicker.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/ascolorpicker.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/bootstrap-maxlength.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/jquery-knob.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/bootstrap-touchspin.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/card.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/jquery-labelauty.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/bootstrap-datepicker.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/jt-timepicker.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/datepair.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/jquery-strength.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/multi-select.js")}}"></script>
+    <script src="{{ asset("global/js/Plugin/jquery-placeholder.js")}}"></script>
+    <script src="{{ asset("assets/examples/js/forms/advanced.js")}}"></script>
+
+    <script>
+        (function(document, window, $) {
+            'use strict';
+            var Site = window.Site;
+            $(document).ready(function() {
+                Site.run();
+            });
+        })(document, window, jQuery);
+    </script>
+    </body>
+    </html>
+{% endblock %}

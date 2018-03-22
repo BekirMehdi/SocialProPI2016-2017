@@ -1,0 +1,81 @@
+
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="{{ asset("global/css/bootstrap.min.css")}}">
+<link rel="stylesheet" href="{{ asset("global/css/bootstrap-extend.min.css")}}">
+<link rel="stylesheet" href="{{ asset("assets/css/site.min.css")}}">
+
+<link rel="stylesheet" href="{{ asset("assets/examples/css/tables/basic.css")}}">
+
+
+<link href="{{ asset('bundles/MainBundle/css/bootstrap-table.css') }}" rel="stylesheet">
+
+<table data-toggle="table" data-url="{{ asset('bundles/index3.json') }}"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+    <thead>
+    <tr>
+        <th data-field="Idme" data-checkbox="true" >ID</th>
+        <th data-field="Type"  data-sortable="true">Type</th>
+        <th data-field="Heure" data-sortable="true">Heure</th>
+        <th data-field="Duree" data-sortable="true">Duree</th>
+        <th data-field="Lieu" data-sortable="true">Lieu</th>
+        <th data-field="Description" data-sortable="true">Description</th>
+        <th  data-field="Content" data-sortable="true"></th>
+        <th  data-field="Content2" data-sortable="true"></th>
+    </tr>
+    </thead>
+</table>
+
+<div class="panel">
+
+
+    <div class="col-lg-6">
+        <!-- Example Bordered Table -->
+        <div class="example-wrap">
+
+
+            <div class="example table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Idme</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Duree</th>
+                        <th>Description</th>
+                        <th>Lieu</th>
+                        <th>Actions</th>
+
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for meeting in meetings %}
+                        <tr style="width: 50%">
+                            <td><a href="{{ path('adminMeetings_show', { 'id': meeting.idMe }) }}">{{ meeting.idMe }}</a></td>
+                            <td>{{ meeting.type }}</td>
+                            <td>{% if meeting.date %}{{ meeting.date|date('Y-m-d') }}{% endif %}</td>
+                            <td>{{ meeting.heure }}</td>
+                            <td>{% if meeting.type=='Daily Scrum' %}{{ meeting.duree }} minutes{% endif %}
+                                {% if meeting.type!='Daily Scrum' %}{{ meeting.duree }} heures{% endif %}</td>
+                            <td>{{ meeting.description }}</td>
+                            <td>{{ meeting.lieu }}</td>
+
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+
+
+
+            </div>
+        </div>
+        <!-- End Example Bordered Table -->
+    </div>
+</div>
+
+
+

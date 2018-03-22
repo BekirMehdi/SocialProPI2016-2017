@@ -1,0 +1,76 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+{% block body %}
+    <script src="{{ asset("lib/jquery/jquery.js")}}"></script>
+    <script src="{{ asset("lib/jquery/acces.js")}}"></script>
+        <!-- Notebook Sidebar -->
+    <div class=" app-notebook page-aside-scroll page-aside-left">
+        <div class="page-aside">
+            <div class="page-aside-switch">
+                <i class="icon md-chevron-left" aria-hidden="true"></i>
+                <i class="icon md-chevron-right" aria-hidden="true"></i>
+            </div>
+            <div class="page-aside-inner">
+                <div class="input-search">
+                    <form method="post">
+                    <button class="input-search-btn" type="submit">
+                        <i class="icon md-search" aria-hidden="true"></i>
+                    </button>
+
+                        <input class="form-control" type="text" placeholder="Search Keyword" name="search">
+                    </form>
+                </div>
+                <div class="app-notebook-list page-aside-scroll">
+                    <div data-role="container">
+                        <div data-role="content">
+                            <ul class="list-group">
+                                {% for projet in projets %}
+
+                                <li id="{{ projet.idPo }}" class="list-group-item active mehdi" data-toggle="context" data-target="#contextMenu">
+                                    <h4 class="list-group-item-heading mt-0" style="display:block;">{{ projet.name}}</h4>
+                                    <p class="list-group-item-text" style="display:block;">{{ projet.description }}.</p>
+                                    <div class="info" style="display:block;">
+                                        <i class="icon md-folder "></i>
+                                        <span class="time">{{ projet.datecreation |date('Y-m-d H:i:s')  }}</span>
+                                    </div>
+                                </li>
+
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Notebook Sidebar -->
+        <div class="page-main ">
+            <!--markdown  START-->
+            <div class="att" style="padding: 100px;">
+                <div role="alert" class="alert dark alert-danger alert-avatar alert-dismissible">
+
+                    <span class="avatar">
+                    <img alt="{{ asset(app.user.username) }}" src="{{ asset(app.user.getImg().AssetPath) }}">
+                  </span>
+                    <h4>ACCES CRITIQUE</h4>
+                    <p>
+                        vous trouvez ici les Acces des tous les projets.
+                    </p>
+                </div>
+            </div>
+            <div class="blocAcc">
+            <form method="post">
+                <input class="selectprojet" type="text" name="idProj"  style="display: none" >
+                <textarea name="acces" class="textAcces" id="mdEdit" data-iconlibrary="fa">
+
+                </textarea>
+                <div class="form-group form-material floating " data-plugin="formMaterial">
+                    <button type="submit" class="btn btn-primary waves-effect" id="validateButton1" value="Create">modifiér</button>
+                </div>
+
+            </form>
+            </div>
+            <!--markdown  END-->
+        </div>
+
+    </div>
+{% endblock %}

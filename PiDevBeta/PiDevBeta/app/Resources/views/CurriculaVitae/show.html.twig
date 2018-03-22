@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Curriculavitae</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idcv</th>
+                <td>{{ curriculaVitae.idCv }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ curriculaVitae.type }}</td>
+            </tr>
+            <tr>
+                <th>Local</th>
+                <td>{{ curriculaVitae.local }}</td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td>{{ curriculaVitae.place }}</td>
+            </tr>
+            <tr>
+                <th>Datefrom</th>
+                <td>{% if curriculaVitae.datefrom %}{{ curriculaVitae.datefrom|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateto</th>
+                <td>{% if curriculaVitae.dateto %}{{ curriculaVitae.dateto|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Checked</th>
+                <td>{% if curriculaVitae.checked %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ curriculaVitae.description }}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ curriculaVitae.file }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ curriculaVitae.link }}</td>
+            </tr>
+            <tr>
+                <th>Post</th>
+                <td>{{ curriculaVitae.post }}</td>
+            </tr>
+            <tr>
+                <th>Result</th>
+                <td>{{ curriculaVitae.result }}</td>
+            </tr>
+            <tr>
+                <th>Field</th>
+                <td>{{ curriculaVitae.field }}</td>
+            </tr>
+            <tr>
+                <th>Diploma</th>
+                <td>{{ curriculaVitae.diploma }}</td>
+            </tr>
+            <tr>
+                <th>Activity</th>
+                <td>{{ curriculaVitae.activity }}</td>
+            </tr>
+            <tr>
+                <th>Cause</th>
+                <td>{{ curriculaVitae.cause }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ curriculaVitae.title }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ curriculaVitae.number }}</td>
+            </tr>
+            <tr>
+                <th>Function</th>
+                <td>{{ curriculaVitae.function }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('curriculavitae_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('curriculavitae_edit', { 'idCv': curriculaVitae.idCv }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

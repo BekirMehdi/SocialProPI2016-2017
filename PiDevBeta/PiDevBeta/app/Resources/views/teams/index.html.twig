@@ -1,0 +1,60 @@
+{% extends "::layout/layoutAdmin.html.twig" %}
+
+    {% block body %}
+        <div class="panel">
+            <header class="panel-heading">
+                <h3 class="panel-title">Liste des equipes</h3>
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-15">
+                            <a href="{{ path('adminTeams_new') }}">
+                                <button id="addToTable" class="btn btn-primary" type="button">
+                                    <i class="icon md-plus" aria-hidden="true"></i> Creé nouveu equipe
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-hover table-striped" cellspacing="0" id="exampleAddRow">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Datecreation</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for team in teams %}
+                        <tr class="gradeA">
+                            <td>{{ team.getName() }}</td>
+                            <td>{% if team.getDateCreation() %}{{ team.getDateCreation()|date('Y-m-d') }}{% endif %}</td>
+
+                            <td class="actions">
+                                <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-editing save-row"
+                                   data-toggle="tooltip" data-original-title="Save" hidden><i class="icon md-wrench" aria-hidden="true"></i></a>
+                                <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-editing cancel-row"
+                                   data-toggle="tooltip" data-original-title="Delete" hidden><i class="icon md-close" aria-hidden="true"></i></a>
+                                <a href="{{ path('adminTeams_edit', { 'id': team.getIdEq() }) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
+                                   data-toggle="tooltip" data-original-title="Edit"><i class="icon md-edit" aria-hidden="true"></i></a>
+                                <a href="{{ path('adminTeams_show', { 'id': team.getIdEq() }) }}" class="btn btn-sm btn-icon btn-pure btn-default on-editing save-row"
+                                   data-toggle="tooltip" data-original-title="save"><i class="icon md-wrench" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <ul class="pagination pagination-no-border">
+                    {{ knp_pagination_render(teams) }}
+                </ul>
+            </div>
+        </div>
+
+
+
+
+    {% endblock %}
+
+

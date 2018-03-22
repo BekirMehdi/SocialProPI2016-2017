@@ -1,0 +1,88 @@
+{% extends ':CurriculaVitae:base.html.twig' %}
+
+{% block body %}
+    <div class="page">
+        <div class="page-header">
+            <h1 class="page-title">Ajouter une Publication</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Forms</a></li>
+                <li class="breadcrumb-item active">General</li>
+            </ol>
+            <div class="page-header-actions">
+                <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="tooltip"
+                        data-original-title="Edit">
+                    <i class="icon md-edit" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="tooltip"
+                        data-original-title="Refresh">
+                    <i class="icon md-refresh-alt" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="tooltip"
+                        data-original-title="Setting">
+                    <i class="icon md-settings" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="page-content">
+            <!-- Panel Form Elements -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Form Elements</h3>
+                </div>
+                <div class="panel-body container-fluid">
+                    <div class="row row-lg">
+                        {{ form_start(form) }}
+                        <div class="col-xl-12 form-group">
+                            <label class="floating-label" for="posteE">Nom du projet</label>
+                            {{ form_widget(form.title , {'attr':{'class':'form-control'}}) }}
+
+                        </div>
+                         <div class="col-xl-12 form-group">
+                            <!-- Example Date Range -->
+                            <label class="floating-label" for="inputName">Période</label>
+                            <div class="input-daterange" data-plugin="datepicker">
+                                <div class="input-group">
+                                                                                            <span class="input-group-addon">
+                                                                                              <i class="icon md-calendar" aria-hidden="true"></i>
+                                                                                            </span>
+                                    {{ form_widget(form.datefrom, {'attr':{'class':'form-control'}}) }}
+
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">to</span>
+                                    {{ form_widget(form.dateto, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                            <!-- End Example Date Range -->
+                        </div>
+                        <div class="col-xl-12 form-group">
+                            <label class="floating-label" for="descriptionE">Fonction</label>
+
+                            {{ form_widget(form.function, {'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="col-xl-12 form-group">
+                            <label class="floating-label" for="descriptionE">URL du projet</label>
+
+                            {{ form_widget(form.link, {'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="col-xl-12 form-group">
+                            <label class="floating-label" for="descriptionE">Description</label>
+
+                            {{ form_widget(form.description, {'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        <div class="col-xl-12 form-group">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light waves-round">Submit</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <!-- End Panel Form Elements -->
+
+        </div>
+    </div>
+
+
+{% endblock %}
